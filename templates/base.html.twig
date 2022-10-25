@@ -1,19 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lan="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        <title>{% block title %}BASKET-FIT - Enfile tes baskets et viens transpirer !{% endblock %}</title>
+        <link rel="icon" href="{{ asset('images/musculation.png') }}" rel="stylesheets"> 
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <meta name="description" content="Application de l'enseigne de salle de sport Basket-fit qui permet de gérer les droits accés aux modules de fonctionnalités des franchisés et des structures."/>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+        {% block stylesheets %} {% endblock %}
+        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+        
+
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
+        {% block javascripts %} {% endblock %}
+        <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+        
+        
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <header>
+    
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ path('app_home_page') }}">
+                        <img src= "{{ asset('images/logo_basket-fit-1.png') }}" class="img-fluid logo" alt="logo" width="150px" height="100px">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                   
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ path('app_home_page') }}">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_home_page', {'_fragment' : 'franchise'}) }}">Franchise</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_home_page', {'_fragment' : 'structure'}) }}""> Structures</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="">Permissions</a>
+                            </li>
+                        </ul>
+                        
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+                                <button class="btn btn-danger" type="submit">Rechercher</button>
+                            </form>
+                    </div>
+                    
+                    <div class="navbar-item-custom">
+                        {% if app.user %}
+                        <a href="{{ path('app_login') }}"> Mon compte <small>({{ app.user.firstname }})</small></a> | <a href ="{{ path('app_logout') }}">Déconnexion</a>
+                        {% else %}
+                        <button class="btn btn-danger my-2 my-sm-0" onclick="btn_auth()" type="submit">
+                            <a class="text-light" href="{{ path('app_login') }}">S'identifier</a>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            
+            </nav>         
+       
+        </header>
+
+        <div class="content">
+                
+             {% block body %}{% endblock %}
+        </div>
+
+        <footer>
+            <p class="text-center">BASKET-FIT - Editer par Laetitia DECRE © Tous droits réservés - 2022
+            <a class="text-light" href="{{ path('app_rgpd') }}"> Mentions Légales et Politique de confidentialité</a><p>
+        </footer>
+
+      
     </body>
+    
 </html>
