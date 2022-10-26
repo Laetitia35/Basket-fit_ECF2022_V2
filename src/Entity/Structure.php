@@ -43,6 +43,9 @@ class Structure
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
     private Collection $Permission;
 
+    #[ORM\Column(length: 60)]
+    private ?string $City = null;
+
     public function __construct()
     {
         $this->Permission = new ArrayCollection();
@@ -169,6 +172,18 @@ class Structure
     public function removePermission(Permission $permission): self
     {
         $this->Permission->removeElement($permission);
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->City;
+    }
+
+    public function setCity(string $City): self
+    {
+        $this->City = $City;
 
         return $this;
     }

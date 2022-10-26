@@ -31,7 +31,7 @@ class Franchise
     #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
     private ?User $User = null;
 
-    #[ORM\ManyToMany(targetEntity: Permission::class, mappedBy: 'Franchise')]
+    #[ORM\ManyToMany(targetEntity: Permission::class, mappedBy: 'Franchise', cascade: ['persist', 'remove'])]
     private Collection $permissions;
 
     #[ORM\OneToMany(mappedBy: 'Franchise', targetEntity: Structure::class)]

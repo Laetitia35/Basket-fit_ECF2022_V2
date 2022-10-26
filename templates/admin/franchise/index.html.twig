@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscrire une Franchise{% endblock %}
+
+{% block body %}
+
+<h3 class="text-center">Inscrire une Franchise </h3>
+
+{{ form_start(form) }}
+
+    {{ form_row(form.Name) }}
+    {{ form_row(form.Logo) }}
+    {{ form_row(form.Description) }}
+    {{ form_row(form.Actif) }}
+    {{ form_row(form.User) }}
+    {{ form_row(form.permissions)}}
+    {{ form_row(form.submit) }}
+
+{{ form_end(form) }}
+
+    {% block javascript %} 
+    
+    {% endblock %}
+    
+{% endblock %}

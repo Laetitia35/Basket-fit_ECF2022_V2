@@ -15,7 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/admin/creer-un-utilisateur', name: 'app_register')]
+    #[Route('/admin/creer_un_utilisateur', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, PasswordGenerator $passwordGenerator): Response
     {
         $generator = $passwordGenerator->generateRandomStrongPassword(10);

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer les permissions{% endblock %}
+
+{% block body %}
+   
+   <h3 class="text-center">Créer les permissions</h3>
+    
+    {{ form_start(form) }}
+
+        {{ form_row(form.Name) }}
+        {{ form_row(form.Actif) }}
+        {{ form_row(form.submit) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

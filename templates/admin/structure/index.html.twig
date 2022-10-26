@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscrire une Structure{% endblock %}
+
+{% block body %}
+
+<h3 class="text-center">Créer une Structure</h3>
+
+   {{ form_start(form) }}
+
+        {{ form_row(form.Name) }}
+        {{ form_row(form.Adress) }}
+        {{ form_row(form.CodePostal) }}
+        {{ form_row(form.City) }}
+        {{ form_row(form.PhoneNumber) }}
+        {{ form_row(form.Description) }}
+        {{ form_row(form.Actif) }}
+        {{ form_row(form.User) }}
+        {{ form_row(form.Franchise) }}
+        {{ form_row(form.Permission) }}
+        {{ form_row(form.submit) }}
+
+   {{ form_end(form) }}
+
+
+{% endblock %}
