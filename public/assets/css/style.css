@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+html, body {
+    height : 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+}
+
+.content {
+    padding: 15px 15px 15px;
+}
+
+ header, footer {
+
+    background-color: #F27D10;
+    color: white;
+      
+}
+
+.navbar-item-custom, .navbar-item-custom a {
+    color: white;
+}
+
+footer {
+    padding : 15px;
+    text-align: center;
+    
+}
+
+@media screen and (min-width: 768px) {
+
+    .content {
+        padding: 50px 80px 50px;
+    }
+    
+}

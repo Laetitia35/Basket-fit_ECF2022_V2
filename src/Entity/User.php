@@ -3,18 +3,21 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+ 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -36,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $Actif = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true, type: Types::DATETIME_IMMUTABLE, options: ['default' =>'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $CreatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'User')]
@@ -47,6 +50,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'User', cascade: ['persist', 'remove'])]
     private ?Structure $structure = null;
+
+    public function __construct()
+    {
+        $this->CreatedAt = new \DateTimeImmutable();
+    }
+
+    public function __toString() 
+    {
+        return $this->Name;
+    }
 
     public function getId(): ?int
     {

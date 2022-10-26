@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription des Utilisateurs{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Inscription des utilisateurs</h3>
+
+    {{ form_start(registrationForm) }}
+    
+         {{ form_row(registrationForm.Name) }}
+          {{ form_row(registrationForm.phone_number) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe à saisir :'
+        }) }}
+        <div class="alert alert-danger">{{ generator }}</div>
+        {{ form_row(registrationForm.actif) }}
+        {{ form_row(registrationForm.role) }}
+        {{ form_row(registrationForm.agreeTerms, {
+            label: "J'accepte les mentions légales"
+        }) }}
+        {{ form_row(registrationForm.submit) }}
+
+    {{ form_end(registrationForm) }}
+
+
+{% endblock %}
