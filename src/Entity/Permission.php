@@ -22,15 +22,17 @@ class Permission
     #[ORM\Column]
     private ?bool $Actif = null;
 
-    #[ORM\ManyToMany(targetEntity: Franchise::class, inversedBy: 'permissions')]
-    private Collection $Franchise;
+    #[ORM\ManyToMany(targetEntity: Franchise::class, mappedBy: 'permissions')]
+    private Collection $franchises;
 
-    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'Permission')]
+    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permissions')]
     private Collection $structures;
 
+
+    
     public function __construct()
     {
-        $this->Franchise = new ArrayCollection();
+        $this->franchises = new ArrayCollection();
         $this->structures = new ArrayCollection();
     }
 
@@ -63,18 +65,27 @@ class Permission
         return $this;
     }
 
+    
+    
+
+    public function __toString()
+    {
+        return $this->Name;
+    }
+
     /**
      * @return Collection<int, Franchise>
      */
-    public function getFranchise(): Collection
+    public function getFranchises(): Collection
     {
-        return $this->Franchise;
+        return $this->franchises;
     }
 
     public function addFranchise(Franchise $franchise): self
     {
-        if (!$this->Franchise->contains($franchise)) {
-            $this->Franchise->add($franchise);
+        if (!$this->franchises->contains($franchise)) {
+            $this->franchises->add($franchise);
+            $franchise->addPermission($this);
         }
 
         return $this;
@@ -82,7 +93,9 @@ class Permission
 
     public function removeFranchise(Franchise $franchise): self
     {
-        $this->Franchise->removeElement($franchise);
+        if ($this->franchises->removeElement($franchise)) {
+            $franchise->removePermission($this);
+        }
 
         return $this;
     }

@@ -65,9 +65,6 @@ class FranchiseType extends AbstractType
 
             -> add('permissions', EntityType::class, [
                 'class' => Permission:: class,
-                'choice_label' =>'Name',
-                'placeholder' => "Permission ",
-                'label' => 'Permissions :' ,
                 'multiple' => true,
                 'query_builder' => function(EntityRepository $repository) {
                     return $repository->createQueryBuilder('p')

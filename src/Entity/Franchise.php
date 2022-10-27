@@ -30,18 +30,21 @@ class Franchise
 
     #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
     private ?User $User = null;
-
-    #[ORM\ManyToMany(targetEntity: Permission::class, mappedBy: 'Franchise', cascade: ['persist', 'remove'])]
-    private Collection $permissions;
-
+ 
+   
     #[ORM\OneToMany(mappedBy: 'Franchise', targetEntity: Structure::class)]
     private Collection $structures;
 
+    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'franchises')]
+    private Collection $permissions;
+
     public function __construct()
     {
-        $this->permissions = new ArrayCollection();
+       
         $this->structures = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -108,33 +111,7 @@ class Franchise
         return $this;
     }
 
-    /**
-     * @return Collection<int, Permission>
-     */
-    public function getPermissions(): Collection
-    {
-        return $this->permissions;
-    }
-
-    public function addPermission(Permission $permission): self
-    {
-        if (!$this->permissions->contains($permission)) {
-            $this->permissions->add($permission);
-            $permission->addFranchise($this);
-        }
-
-        return $this;
-    }
-
-    public function removePermission(Permission $permission): self
-    {
-        if ($this->permissions->removeElement($permission)) {
-            $permission->removeFranchise($this);
-        }
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection<int, Structure>
      */
@@ -164,4 +141,34 @@ class Franchise
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->Name;
+    }
+
+    /**
+     * @return Collection<int, Permission>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permission $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): self
+    {
+        $this->permissions->removeElement($permission);
+
+        return $this;
+    }
 }
+

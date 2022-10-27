@@ -1,7 +1,187 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard d'Administrateur{% endblock %}
+{% block title %}Admin{% endblock %}
+
+{% block stylesheet %} {% endblock %}
 
 {% block body %}
+
+  <a class="btn btn-warning" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Menu</a>
+  <a href="{{ path ('app_home_page') }}" class="btn btn-secondary">Retourner à l'espace utilisateur</a>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-center" id="offcanvasExampleLabel">Menu administrateur</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        Gérer la création d'utilisateur, franchise, structure et permissions grâce à un simple formulaire d'inscription.
+      </div>
+      <br>
+      <div class="admin-sidebar card">
+         <ul class="list-group list-group-flush">
+             <li class="list-group-item"><img src= "{{ asset('images/user.png') }}"></img><a href="{{ path('app_register') }}"> Créer un utilisateur</a></li>
+             <li class="list-group-item"><img src= "{{ asset('images/poignee-de-main.png') }}"></img><a href="{{ path('app_create_franchise') }}"> Créer une franchise</a></li>           
+             <li class="list-group-item"><img src= "{{ asset('images/batiment.png') }}"></img><a href="{{ path('app_create_structure') }}"> Créer une structure</a></li>
+             <li class="list-group-item"><img src= "{{ asset('images/livre-fleche-droite.png') }}"></img><a href="{{ path('app_create_permission') }}"> Créer une permission</a></li>
+         </ul>
+     </div>
+
+      <br>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"><a href="{{ path ('app_home_page') }}"</a>
+          Accéder à l'espace utilisateur 
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#"></a></li>
+          <li><a class="dropdown-item" href="#"></a></li>
+          <li><a class="dropdown-item" href="#"></a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div> 
+    <div class="card text-center">
+        <div class="card-header">
+          <img src= "{{ asset('images/valise-alt.png') }}"></img>
+          <h3 class="text-center">Panel d'administration</h3>  
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Bonjour <strong>{{ app.user }}</strong>, bienvenue dans votre espace personnel d'administration de Basket-fit</h5>
+            <p class="card-text">Gérer la création d'utilisateur, franchise, structure et permissions grâce à un simple formulaire d'inscription.</p>
+            <a class="btn btn-warning" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Menu</a>
+        </div>
+    </div>
+
+  <section id="Franchise">
+    
+    <div class="Franchise card text-center">
+      <div class="card-header">
+          <img src= "{{ asset('images/poignee-de-main.png') }}">
+          <h3 class="text-center">Franchises</h3>  
+      </div>
+        <div class="card-body">
+        <a href="{{ path('app_create_franchise') }}" class="btn btn-info">Ajouter</a>
+    
+          {% for franchise in franchises %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="franchise card text-center">
+              
+                <div class="franchise card-body">
+                  <h5 class="franchise card-header text-danger">{{ franchise.id }}  {{ franchise.name }}</h5><br>
+                  <p class="franchise card-text">{{ franchise.description }}</p>
+                  <strong><p class="franchise card-text text-primary">Responsable de la franchise (Mr ou Mme) : {{ franchise.user }}</p></strong>
+                  <br>
+                  <div class="form-check form-switch">
+                      <label class="form-check-label" for="flexSwitchCheckDefault">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ (franchise.actif) ? 'checked' : "" }} data-id= "{{franchise.id}}"> Actif
+                      </label>    
+                  </div>
+                  <hr>
+                    <strong><p class="card-text bg-warning">Permission de la Franchise :  </p></strong>
+                    {% for permission in franchise.permissions %}
+                    <p>{{ permission }}</p>
+                    {% endfor %}
+                    <hr>
+                  <br>
+                  <a href="{{ path("app_update_franchise", {id: franchise.id}) }}" class="btn btn-success">Modifier</a>
+                  <a href="#" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{franchise.id}}" data-name="{{franchise.name}}">
+                  Supprimer
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Supprimer une franchise</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Etes vous sûrs de vouloir supprimer la franchise ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                  <a href="{{ path("app_delete_franchise", {id: franchise.id}) }}" class="btn btn-danger">Accepter</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </section>
+
+    <section id="Structure">
+      
+      <div class="Structure card text-center">
+        <div class="card-header">
+          <img src= "{{ asset('images/batiment.png') }}"></img>
+          <h3 class="text-center">Structures</h3>  
+        </div>
+          <div class="card-body">
+          <a href="{{ path('app_create_structure') }}" class="btn btn-info">Ajouter</a>
+
+           {% for structure in structures %}
+            <div class="row">
+              <div class="col-md-6">
+             
+                <div class="card text-center">
+                  <div class="card-body">
+                    <h5 class="card-header text-danger">{{ structure.id }} {{ structure.name }}</h5>
+                    <br>
+                    <span> Adresse : {{structure.adress}}<br>{{structure.codePostal}} {{structure.city}}<br>{{structure.phoneNumber}}
+                    </span>
+                    <hr>
+                    <p class="card-text">{{ structure.description }}</p>
+                    <strong><p class="card-text text-primary">Responsable de la structure( Mr ou Mme ) : {{ structure.user }}</p></strong><br>
+                    <strong><p class="card-text text-success">Franchise de la structure : {{ structure.franchise }}</p></strong>
+                    <br>
+                    <div class="form-check form-switch">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">
+                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{ (structure.actif) ? 'checked' : "" }} data-id= "{{structure.id}}">Actif
+                        </label>
+                    </div>
+                    <hr>
+                    <strong><p class="card-text bg-warning">Permission de la structure : </p></strong>
+                    <p></p>
+                    <hr>
+                    <a href="{{ path("app_update_structure", {id: structure.id}) }}" class="btn btn-success">Modifier</a>
+                  
+                    <a href="#" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{structure.id}}" data-name="{{structure.name}}">
+                    Supprimer
+                    </a>
+                    <!-- Modal Supprimer -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Desactiver la structure </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Etes vous sûrs de vouloir supprimer la structure ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <a href="{{ path("app_delete_structure", {id: structure.id}) }}" class="btn btn-danger">Accepter</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+      </div>    
+    </section> 
+
+    {% block javascript %} {% endblock %}
 
 {% endblock %}

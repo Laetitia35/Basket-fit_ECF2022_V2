@@ -34,7 +34,7 @@ class RegistrationFormType extends AbstractType
                     'max' => 60,
                 ]),
                 'attr' =>[
-                    'placeholder' => "Merci de saisir le Nom et Prénom de l'utilisateur"
+                    'placeholder' => "Merci de saisir le Prénom et le Nom de l'utilisateur"
                 ]
             ])
 

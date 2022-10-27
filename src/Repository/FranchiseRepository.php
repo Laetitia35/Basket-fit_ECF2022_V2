@@ -39,6 +39,22 @@ class FranchiseRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Franchise[] Returns an array of Franchise objects
+     */
+    public function findByExampleField($permissions): array
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.permissions = :perm')
+            ->setParameter('perm', $permissions)
+            ->orderBy('f.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 //    /**
 //     * @return Franchise[] Returns an array of Franchise objects
 //     */
@@ -53,6 +69,7 @@ class FranchiseRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
+
 
 //    public function findOneBySomeField($value): ?Franchise
 //    {

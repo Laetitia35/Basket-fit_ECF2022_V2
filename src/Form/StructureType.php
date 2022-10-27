@@ -113,7 +113,7 @@ class StructureType extends AbstractType
                        'class' => 'form-select'
                   ],
                   'expanded' => true,
-                  'constraints' => new NotBlank(['message' => 'veuillez choisir une permission ']),
+                  'constraints' => new NotBlank(['message' => 'veuillez choisir une ou plusieurs permissions ']),
             ])
 
             ->add('submit', SubmitType::class, [

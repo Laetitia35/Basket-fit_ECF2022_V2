@@ -37,18 +37,23 @@ class Structure
     private ?User $User = null;
 
     #[ORM\ManyToOne(inversedBy: 'structures')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Franchise $Franchise = null;
 
-    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
-    private Collection $Permission;
-
+    
     #[ORM\Column(length: 60)]
     private ?string $City = null;
 
+    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
+    private Collection $permissions;
+
+    public function __toString() 
+    {
+        return $this->Name;
+    }
+
     public function __construct()
     {
-        $this->Permission = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,29 +157,7 @@ class Structure
         return $this;
     }
 
-    /**
-     * @return Collection<int, Permission>
-     */
-    public function getPermission(): Collection
-    {
-        return $this->Permission;
-    }
-
-    public function addPermission(Permission $permission): self
-    {
-        if (!$this->Permission->contains($permission)) {
-            $this->Permission->add($permission);
-        }
-
-        return $this;
-    }
-
-    public function removePermission(Permission $permission): self
-    {
-        $this->Permission->removeElement($permission);
-
-        return $this;
-    }
+    
 
     public function getCity(): ?string
     {
@@ -184,6 +167,30 @@ class Structure
     public function setCity(string $City): self
     {
         $this->City = $City;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Permission>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permission $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): self
+    {
+        $this->permissions->removeElement($permission);
 
         return $this;
     }

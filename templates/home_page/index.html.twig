@@ -3,5 +3,98 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+    
+  <div class="card text-center">
+    <div class="card-header">
+      <img src= "{{ asset('images/user.png') }}">
+      <h3>Espace personnel</h3>       
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Bienvenue <strong>{{ app.user.name }}</strong></h5>
+        <p>Vérifier les permissions qui vous est accorder selon le contrat de votre franchise passer avec basket-fit </p>
+        <a href="{{ path('app_account_password') }}" class="btn btn-warning"> Modifier mon mot de passe</a>
+          {% if is_granted('ROLE_ADMIN') %}  
+            <a href="{{ path('app_admin') }}" class="btn btn-success">Accéder à votre panel d'administration</a>
+          {% endif %}       
+    </div>
+  </div>
+
+  <section id="franchise">
+    <div class="Franchise card text-center">
+      <div class="card-header">
+          <img src= "{{ asset('images/poignee-de-main.png') }}">
+          <h3 class="text-center">Franchises</h3>  
+      </div>
+      <div class="card-body">  
+
+        {% for franchise in franchises %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col">
+            <div class="franchise card text-center">
+              <img src="/uploads/{{ franchise.logo }}" class="card-img-top" alt="{{ franchise.logo }}">
+              <div class="franchise card-body">
+                <h5 class="franchise card-header text-danger">{{ franchise.id}}  {{ franchise.name }}</h5><br>
+                <p class="franchise card-text">{{ franchise.description }}</p>
+                <strong><p class="franchise card-text text-primary">Responsable de la franchise (Mr ou Mme) : {{ franchise.user }}</p></strong>
+                <br>
+                <div class="form-check form-switch">
+                    <button type="button" class="btn btn-success"    
+                     {{ (franchise.actif) ? 'checked' : "" }} data-id= "{{ franchise.id }}">Actif      
+                    </button>    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+
+  <section id="structure">
+    
+    <div class="Franchise card text-center">
+      <div class="card-header">
+          <img src= "{{ asset('images/batiment.png') }}"></img>
+          <h3 class="text-center">Structures</h3>  
+      </div>
+      <div class="card-body">
+  
+        {% for structure in structures %}
+
+        <div class="row row-cols-2 row-cols-md-2 g-4">
+          <div class="col">
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card card-header text-danger">{{ structure.id }}  {{ structure.name }}</h5>
+                <span> Adresse : {{structure.adress}}<br>{{structure.codePostal}} {{structure.city}}<br>{{structure.phoneNumber}}
+                </span>
+                <hr>
+                <p class="card-text">{{ structure.description }}</p>
+                <strong>
+                  <p class="card-text text-primary">Responsable de la structure( Mr ou Mme ) : {{ structure.user }} </p>
+                </strong>
+                <br>
+                <strong>
+                  <p class="card-text text-success">Franchise de la structure : {{ structure.franchise }} </p>
+                </strong>
+                <br>
+                <div class="form-check form-switch">
+                        <button type="button" class="btn btn-success" {{ (structure.actif) ? "1" : "" }} data-id= "{{structure.id}}">Actif
+                       </button>        
+                </div>
+                <hr>
+                <strong>
+                  <p class="card-text bg-warning">Permission de la structure :</p>
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>   
 
 {% endblock %}

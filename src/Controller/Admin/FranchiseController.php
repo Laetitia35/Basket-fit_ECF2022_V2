@@ -22,17 +22,18 @@ class FranchiseController extends AbstractController
         // ecouteur de la requête
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             /**
-             * @var Permission $Permission
+             *  //Permission $Permission
              */
-            $permissions = $form->get('permissions')->getData();
+            //$permissions = $form->get('permissions')->getData();
             
-            foreach ($permissions as $permission) {
+            //foreach ($permissions as $permission) {
                 
-                $franchise->addPermission($permission);
-                
-            }
+                //$franchise->addPermission($permission);   
+            //}
+
             $entityManager->persist($franchise);
             $entityManager->flush();
 
@@ -44,4 +45,64 @@ class FranchiseController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/admin/modifier_une_franchise/{id}', name: 'app_update_franchise')]
+    public function UpdateFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager): Response
+    {
+    
+        $formFranchise = $this->createForm(FranchiseType::class); //creation du formulaire
+        // ecouteur de la requête
+        $formFranchise->handleRequest($request);
+         
+        // condition si le formulaire et envoyer et valide alors j'execute le code
+        if($formFranchise->isSubmitted() && $formFranchise->isValid()) {
+            
+            $permissions = $formFranchise->get('franchisePermission')->getData();
+            foreach ( $permissions as $permission) {
+                //$formFranchise->addPermissionsGlobale($permissions);
+                
+            }
+
+            //dd($form->getData());
+            $entityManager->persist($franchise);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('admin/franchise/index.html.twig', [
+            'franchise' =>$franchise,
+            'formFranchise' => $formFranchise->createView()
+            
+        ]);
+    }
+
+    #[Route('/admin/activer_une_franchise/{id}', name: 'app_enable_franchise')]
+    public function EnableFranchise(Franchise $franchise, EntityManagerInterface $entityManager)
+    {
+        $franchise->setActif(($franchise->isActif())? false:true);
+
+        $entityManager->persist($franchise);
+        $entityManager->flush();
+
+        return new Response("true");  
+        
+    } 
+    
+    #[Route('/admin/supprimer_une_franchise/{id}', name: 'app_delete_franchise')]
+    public function DeleteFranchise(Franchise $franchise, EntityManagerInterface $entityManager)
+    {
+
+        $entityManager->persist($franchise);
+        $entityManager->remove($franchise);
+
+        $this->addFlash('message', 'Franchise supprimer avec succès' );
+
+        return $this->redirectToRoute('app_admin');  
+        
+    } 
+
 }
+
+
