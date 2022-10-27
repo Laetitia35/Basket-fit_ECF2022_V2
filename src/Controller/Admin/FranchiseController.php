@@ -37,7 +37,6 @@ class FranchiseController extends AbstractController
             $entityManager->persist($franchise);
             $entityManager->flush();
 
-
             return $this->redirectToRoute('app_admin');
         }
 
@@ -49,34 +48,25 @@ class FranchiseController extends AbstractController
     #[Route('/admin/modifier_une_franchise/{id}', name: 'app_update_franchise')]
     public function UpdateFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager): Response
     {
-    
-        $formFranchise = $this->createForm(FranchiseType::class); //creation du formulaire
+        
+        //creation du formulaire
+        $form = $this->createForm(FranchiseType::class, $franchise); 
         // ecouteur de la requête
-        $formFranchise->handleRequest($request);
-         
-        // condition si le formulaire et envoyer et valide alors j'execute le code
-        if($formFranchise->isSubmitted() && $formFranchise->isValid()) {
-            
-            $permissions = $formFranchise->get('franchisePermission')->getData();
-            foreach ( $permissions as $permission) {
-                //$formFranchise->addPermissionsGlobale($permissions);
-                
-            }
+        $form->handleRequest($request);
 
-            //dd($form->getData());
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             $entityManager->persist($franchise);
             $entityManager->flush();
-
-
+            
             return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('admin/franchise/index.html.twig', [
-            'franchise' =>$franchise,
-            'formFranchise' => $formFranchise->createView()
-            
+            'form' => $form->createView(),
         ]);
     }
+    
 
     #[Route('/admin/activer_une_franchise/{id}', name: 'app_enable_franchise')]
     public function EnableFranchise(Franchise $franchise, EntityManagerInterface $entityManager)
@@ -86,8 +76,7 @@ class FranchiseController extends AbstractController
         $entityManager->persist($franchise);
         $entityManager->flush();
 
-        return new Response("true");  
-        
+        return new Response("true");      
     } 
     
     #[Route('/admin/supprimer_une_franchise/{id}', name: 'app_delete_franchise')]
@@ -97,7 +86,7 @@ class FranchiseController extends AbstractController
         $entityManager->persist($franchise);
         $entityManager->remove($franchise);
 
-        $this->addFlash('message', 'Franchise supprimer avec succès' );
+        $this->addFlash('message', 'Franchise supprimer avec succès');
 
         return $this->redirectToRoute('app_admin');  
         

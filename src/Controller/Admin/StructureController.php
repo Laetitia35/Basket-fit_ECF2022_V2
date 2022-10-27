@@ -86,14 +86,12 @@ class StructureController extends AbstractController
     public function EnableStructure( EntityManagerInterface $entityManager, Structure $structure)
     {
 
-        
         $structure->setActif(($structure->isActif())? false:true);
        
         $entityManager->persist($structure);
         $entityManager->flush();
 
-        return new Response ("true");
-        
+        return new Response ("true");   
         
     }
 
