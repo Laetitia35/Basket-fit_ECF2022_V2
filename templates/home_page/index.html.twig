@@ -28,6 +28,7 @@
       <div class="card-body">  
 
         {% for franchise in franchises %}
+        {#% app.user.id == franchises.user.id %#}
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <div class="col">
             <div class="franchise card text-center">
@@ -35,13 +36,22 @@
               <div class="franchise card-body">
                 <h5 class="franchise card-header text-danger">{{ franchise.id}}  {{ franchise.name }}</h5><br>
                 <p class="franchise card-text">{{ franchise.description }}</p>
-                <strong><p class="franchise card-text text-primary">Responsable de la franchise (Mr ou Mme) : {{ franchise.user }}</p></strong>
+                <strong><p class="franchise card-text text-primary">Responsable de la franchise : {{ franchise.user }}</p></strong>
                 <br>
                 <div class="form-check form-switch">
-                    <button type="button" class="btn btn-success"    
-                     {{ (franchise.actif) ? 'checked' : "" }} data-id= "{{ franchise.id }}">Actif      
-                    </button>    
+                  {% if (franchise.actif)  ? "1" %}
+                        <button type="button" class="btn btn-success" data-id= "{{franchise.id}}">Actif</button>
+                       
+                    {% else %}
+                         </button type="button" class="btn btn-success"> Desactive </button>
+                  {% endif %}
                 </div>
+                <hr>
+                  <strong><p class="card-text bg-warning">Permission de la Franchise :  </p></strong>
+                  <br>
+                  {% for permission in franchise.permissions %}
+                  <p>{{ permission }}</p>
+                  {% endfor %}
               </div>
             </div>
           </div>
@@ -67,7 +77,7 @@
           <div class="col">
             <div class="card text-center">
               <div class="card-body">
-                <h5 class="card card-header text-danger">{{ structure.id }}  {{ structure.name }}</h5>
+                <h5 class="card card-header text-danger">{{ structure.id }}  {{ structure.name }}</h5><br>
                 <span> Adresse : {{structure.adress}}<br>{{structure.codePostal}} {{structure.city}}<br>{{structure.phoneNumber}}
                 </span>
                 <hr>
@@ -81,13 +91,21 @@
                 </strong>
                 <br>
                 <div class="form-check form-switch">
-                        <button type="button" class="btn btn-success" {{ (structure.actif) ? "1" : "" }} data-id= "{{structure.id}}">Actif
-                       </button>        
+                  {% if (structure.actif)  ? "1" %}
+                        <button type="button" class="btn btn-success" data-id= "{{structure.id}}">Actif</button>
+                       
+                    {% else %}
+                         </button type="button" class="btn btn-success"> Desactive </button>
+                  {% endif %}
                 </div>
                 <hr>
                 <strong>
                   <p class="card-text bg-warning">Permission de la structure :</p>
-                </strong>
+                </strong> <br>
+                {% for permission in structure.permissions %}
+                    <p>{{ permission }}</p>
+                {% endfor %}
+                <hr>
               </div>
             </div>
           </div>

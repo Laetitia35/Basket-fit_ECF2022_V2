@@ -37,7 +37,7 @@ class AdminController extends AbstractController
             //dump($franchises->getPermissions());
         
         
-        return $this->render('admin/index.html.twig',[
+        return $this->render('admin/panel.html.twig',[
             'franchises' => $franchises,
             'structures' => $structures,
             'user' => $user,

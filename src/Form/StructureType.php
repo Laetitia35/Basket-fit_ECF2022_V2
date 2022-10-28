@@ -100,10 +100,10 @@ class StructureType extends AbstractType
                 
             ])
 
-            ->add('Permission', EntityType::class, [
+            ->add('permissions', EntityType::class, [
                 'class' => Permission:: class,
                 'choice_label' =>'Name',
-                'placeholder' => "Permission ",
+                'placeholder' => "permissions ",
                 'label' => 'Permission de la structure:' ,
                 'multiple' => true,
                 'query_builder' => function(EntityRepository $repository) {

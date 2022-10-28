@@ -2,7 +2,7 @@
 
 
     window.onload = () => {
-        let active = document.querySelectorAll("[type=checkbox franchise]")
+        let active = document.querySelectorAll("[type=checkbox]")
         for (let button of active) {
             button.addEventListener("click", function() {
                 let xmlhttp = new XMLHttpRequest;
@@ -19,7 +19,7 @@
 // admin activer btn Structure  
 
 window.onload = () => {
-    let active = document.querySelectorAll("[type=checkbox structure]")
+    let active = document.querySelectorAll("[type=checkbox]")
     for (let button of active) {
         button.addEventListener("click", function() {
             let xmlhttp = new XMLHttpRequest;

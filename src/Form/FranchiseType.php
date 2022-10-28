@@ -61,6 +61,12 @@ class FranchiseType extends AbstractType
                 'placeholder' => "Nom du Franchisé ",
                 'label' => 'Nom : ',
                 'multiple' => false,
+                'query_builder' => function(EntityRepository $repository) {
+                    return $repository->createQueryBuilder('u')
+                      ->orderBy('u.Name', 'ASC');
+                    }, 'attr' => [
+                       'class' => 'form-select'
+                  ],
             ])
 
             -> add('permissions', EntityType::class, [
@@ -73,20 +79,8 @@ class FranchiseType extends AbstractType
                        'class' => 'form-select'
                   ],
                   'expanded' => true,
-                  'constraints' => new NotBlank(['message' => 'veuillez choisir une ou plusieurs permissions']),
-                  
-
+                  'constraints' => new NotBlank(['message' => 'veuillez choisir une ou plusieurs permissions'])
             ])
-
-            /*->add('permissions', CollectionType::class, [
-                'entry_type' => PermissionType::class,
-                'label' => 'permissions',
-                'entry_options' =>['label'=> false],
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference'=> false,
-                
-            ])*/
 
             ->add('submit', SubmitType::class, [
                 'label' => "Valider"
