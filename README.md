@@ -1,1 +1,33 @@
-# Basket-fit_ECF
+# Basket-fit
+
+Un projet réaliser pour mon évaluation en cours de formation de chez Studi pour la session d'examen de décembre 2022.
+
+## Application réaliser en Symfony 6.1.5   
+
+## Installation en local
+
+Cloner le dépôt Github puis déposer le dans le dossier de votre serveur local dans le fichier htdocs ou www 
+
+Activer le serveur apache ainsi que mysql sur votre panel de server ( wamp, xampp ou mamp ).
+
+Penser à bien modifier vos Variables d'environnement avec vos informations de connexion dans le fichier .env et à le renommer en .env.local.php pour qu'il ne soit pas divulger sur github. 
+
+Pour installer les dépendances necessaire à symfony, effectuer la commande :
+```bash
+  composer install
+```
+Ensuite, vous pouvez lancer la commande suivante pour démarrer le serveur local :
+```bash
+  Symfony server:start
+```
+Ouvrer votre navigateur sur la page http:/localhost:8000/
+Pour plus d'information n'hesitez pas à consulter la documentation officiel de Symfony. 
+
+## Deploiement effectuer sur heroku
+
+Créer un compte sur Heroku. 
+Cloner le projet puis suiver les instructions du bundle créer par une ancienne élève de mon école.
+
+https://github.com/Nathalie-Verdavoir/deploy-heroku
+
+ Cela symplifie le déployement et installe une base de données à notre compte heroku.
