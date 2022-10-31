@@ -30,6 +30,7 @@ http:/localhost:8000/
 ## Documentation
 
 Pour plus d'information n'hesitez pas à consulter la documentation officiel de Symfony.
+
 [Documentation officiel de Symfony](https://symfony.com/doc/current/index.html)
 
 
