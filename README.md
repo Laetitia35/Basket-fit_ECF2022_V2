@@ -1,5 +1,5 @@
 # Basket-fit
- (![logo_basket-fit-1](https://user-images.githubusercontent.com/82384109/199078025-4ee6d2aa-3c78-404d-8c1a-5aa72ec4e4c6.png)
+ ![logo_basket-fit-1](https://user-images.githubusercontent.com/82384109/199078025-4ee6d2aa-3c78-404d-8c1a-5aa72ec4e4c6.png)
 
 
 Un projet réaliser pour mon évaluation en cours de formation de chez Studi pour la session d'examen de décembre 2022.
@@ -22,11 +22,14 @@ Ensuite, vous pouvez lancer la commande suivante pour démarrer le serveur local
 ```bash
   Symfony server:start
 ```
-Ouvrer votre navigateur sur la page http:/localhost:8000/
-Pour plus d'information n'hesitez pas à consulter la documentation officiel de Symfony. 
+Ouvrer votre navigateur sur la page 
+```bash 
+http:/localhost:8000/
+```
 
 ## Documentation
 
+Pour plus d'information n'hesitez pas à consulter la documentation officiel de Symfony.
 [Documentation officiel de Symfony](https://symfony.com/doc/current/index.html)
 
 
