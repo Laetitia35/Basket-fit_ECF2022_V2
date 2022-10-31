@@ -1,6 +1,11 @@
 # Basket-fit
- ![logo_basket-fit-1](https://user-images.githubusercontent.com/82384109/199078025-4ee6d2aa-3c78-404d-8c1a-5aa72ec4e4c6.png)
 
+### Application web de gestion de salle de sport pour une grande marque possèdant plusieurs franchises. Elle permet de gérer les droits accès aux permissions accordées à ses structures selon le contrat qui lie la marque aux franchises à destination de ses équipes.
+
+Cliquer ici pour découvrir l'application web [Basket-fit](https://basket-fit.herokuapp.com/login) !
+
+ ![logo_basket-fit-1](https://user-images.githubusercontent.com/82384109/199078025-4ee6d2aa-3c78-404d-8c1a-5aa72ec4e4c6.png)
+ 
 
 Un projet réaliser pour mon évaluation en cours de formation de chez Studi pour la session d'examen de décembre 2022.
 
