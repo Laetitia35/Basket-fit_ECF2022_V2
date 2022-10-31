@@ -1,5 +1,5 @@
 # Basket-fit
-![LOGO] (![logo_basket-fit-1](https://user-images.githubusercontent.com/82384109/199078025-4ee6d2aa-3c78-404d-8c1a-5aa72ec4e4c6.png)
+ (![logo_basket-fit-1](https://user-images.githubusercontent.com/82384109/199078025-4ee6d2aa-3c78-404d-8c1a-5aa72ec4e4c6.png)
 
 
 Un projet réaliser pour mon évaluation en cours de formation de chez Studi pour la session d'examen de décembre 2022.
@@ -27,7 +27,7 @@ Pour plus d'information n'hesitez pas à consulter la documentation officiel de 
 
 ## Documentation
 
-[Documentation](https://symfony.com/doc/current/index.html)
+[Documentation officiel de Symfony](https://symfony.com/doc/current/index.html)
 
 
 ## Deploiement effectuer sur heroku
@@ -37,10 +37,11 @@ Cloner le projet puis suiver les instructions du bundle créer par une ancienne 
 
 https://github.com/Nathalie-Verdavoir/deploy-heroku
 
- Cela symplifie le déployement et installe une base de données à notre compte heroku.
+ Cela simplifie le déployement et installe une base de données à notre compte heroku.
+ Il ne reste plus qu'à paramétrer les variables d'environnements et la base de données avec les informations d'Heroku.
 
 ## Technologie Utiliser :
 
 **Client:** Twig, Bootstrap, Javascript 
 
-**Server:** Symfony, PHP, ORM Doctrine
+**Server:** Symfony 6.1.5, PHP 8.1, ORM Doctrine
