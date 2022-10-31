@@ -1,6 +1,6 @@
 # Basket-fit
 
-### Application web de gestion de salle de sport pour une grande marque possèdant plusieurs franchises. Elle permet de gérer les droits accès aux permissions accordées à ses structures selon le contrat qui lie la marque aux franchises à destination de ses équipes.
+ Application web de gestion de salle de sport pour une grande marque possèdant plusieurs franchises. Elle permet de gérer les droits accès aux permissions accordées à ses structures selon le contrat qui lie la marque aux franchises à destination de ses équipes.
 
 Cliquer ici pour découvrir l'application web [Basket-fit](https://basket-fit.herokuapp.com/login) !
 
