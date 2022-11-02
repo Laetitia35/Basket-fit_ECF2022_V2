@@ -54,3 +54,11 @@ https://github.com/Nathalie-Verdavoir/deploy-heroku
 **Client:** Twig, Bootstrap, Javascript 
 
 **Server:** Symfony 6.1.5, PHP 8.1, ORM Doctrine
+
+## Documentations Techniques du projet
+
+![Cas utilisation UML Basket-fit.png]
+![charte graphique.pdf]
+![Basket-fit-desktop-Wireframe-.pdf]
+![Basket-fit-mobile-Wireframe.pdf]
+![Diagramme MPD.drawio.pdf]
