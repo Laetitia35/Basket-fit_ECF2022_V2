@@ -57,8 +57,8 @@ https://github.com/Nathalie-Verdavoir/deploy-heroku
 
 ## Documentations Techniques du projet
 
-![Cas utilisation UML Basket-fit.png]
-![charte graphique.pdf]
-![Basket-fit-desktop-Wireframe-.pdf]
-![Basket-fit-mobile-Wireframe.pdf]
-![Diagramme MPD.drawio.pdf]
+>[auto](.Cas utilisation UML Basket-fit.png)
+>[auto](.charte graphique.pdf)
+>[auto](.Basket-fit-desktop-Wireframe-.pdf)
+>[auto](.Basket-fit-mobile-Wireframe.pdf)
+>[auto](.Diagramme MPD.drawio.pdf)
