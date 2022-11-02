@@ -57,8 +57,6 @@ https://github.com/Nathalie-Verdavoir/deploy-heroku
 
 ## Documentations Techniques du projet
 
->[auto](.Cas utilisation UML Basket-fit.png)
->[auto](.charte graphique.pdf)
->[auto](.Basket-fit-desktop-Wireframe-.pdf)
->[auto](.Basket-fit-mobile-Wireframe.pdf)
->[auto](.Diagramme MPD.drawio.pdf)
+Pour consulter la documenation réaliser pour L'ECF cliquer sur ce lien google Drive :
+Documentation Technique 
+(https://drive.google.com/drive/folders/1EYsSTldv7tGiQNVu23caAcgbQNv_TaD9?usp=sharing)
