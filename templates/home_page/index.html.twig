@@ -27,8 +27,8 @@
       </div>
       <div class="card-body">  
 
-        {% for franchise in franchises %}
-        {#% app.user.id == franchises.user.id %#}
+      {% for franchise in franchises %}
+        {% if app.user.id == franchise.user.id  %}
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <div class="col">
             <div class="franchise card text-center">
@@ -43,7 +43,7 @@
                         <button type="button" class="btn btn-success" data-id= "{{franchise.id}}">Actif</button>
                        
                     {% else %}
-                         </button type="button" class="btn btn-success"> Desactive </button>
+                         </button type="button" class="btn btn-danger">Desactive</button>
                   {% endif %}
                 </div>
                 <hr>
@@ -56,7 +56,9 @@
             </div>
           </div>
         </div>
-        {% endfor %}
+        {% endif %}
+      {% endfor %}
+         
       </div>
     </div>
   </section>
@@ -71,8 +73,10 @@
       </div>
       <div class="card-body">
   
-        {% for structure in structures %}
-
+      {% for structure in structures %}
+        {% if app.user.id == structure.user.id %}
+        {#% for franchise in structure.franchise %#}
+          {#% if app.user.id == structure.franchise %#}
         <div class="row row-cols-2 row-cols-md-2 g-4">
           <div class="col">
             <div class="card text-center">
@@ -95,7 +99,7 @@
                         <button type="button" class="btn btn-success" data-id= "{{structure.id}}">Actif</button>
                        
                     {% else %}
-                         </button type="button" class="btn btn-success"> Desactive </button>
+                         </button type="button" class="btn btn-danger">Desactive</button>
                   {% endif %}
                 </div>
                 <hr>
@@ -110,6 +114,9 @@
             </div>
           </div>
         </div>
+        {#% endif %#}
+        {#% endfor %#}
+      {% endif %}
         {% endfor %}
       </div>
     </div>

@@ -22,15 +22,15 @@ class HomePageController extends AbstractController
     #[Route('/accueil', name: 'app_home_page')]
     public function home(): Response
     {
-        //$franchises = $this->entityManager->getRepository(Franchise::class)->findOneBy(['user' =>$franchise->getUser]);
         $franchises = $this->entityManager->getRepository(Franchise::class)->findAll();
         $structures = $this->entityManager->getRepository(Structure:: class)->findAll();
-        //$user = $this->entityManager->getRepository(User::class)->findOneBy($user);
+        $user = $this->entityManager->getRepository(User::class)->findAll();
+
         $getUser = $this->getUser();
         return $this->render('home_page/index.html.twig', [
             'franchises' => $franchises,
             'structures' => $structures,
-            //'user' => $user,
+            'user' => $user,
         ]);
     }
 
