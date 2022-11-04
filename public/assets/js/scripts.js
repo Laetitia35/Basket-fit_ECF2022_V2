@@ -1,25 +1,25 @@
 // admin activer btn franchise  
 
 
-    window.onload = () => {
-        let active = document.querySelectorAll("[type=checkbox]")
-        for (let button of active) {
-            button.addEventListener("click", function() {
-                let xmlhttp = new XMLHttpRequest;
-                //xmlhttp.onReadyStateChange = () => {
-                    //verifier la reponse :200
-                //}
-                xmlhttp.open("get",`/admin/activer_une_franchise/${this.dataset.id}`)
-                xmlhttp.send()
-            })
-        }
+window.onload = () => {
+    let active_franchise = document.querySelectorAll("[id=franchise_active]")
+    for (let button of active_franchise) {
+        button.addEventListener("click", function() {
+            let xmlhttp = new XMLHttpRequest;
+            //xmlhttp.onReadyStateChange = () => {
+                //verifier la reponse :200
+            //}
+            xmlhttp.open("get",`/admin/activer_une_franchise/${this.dataset.id}`)
+            xmlhttp.send()
+        })
     }
+}
 
 
 // admin activer btn Structure  
 
 window.onload = () => {
-    let active = document.querySelectorAll("[type=checkbox]")
+    let active = document.querySelectorAll("[id=structure_active]")
     for (let button of active) {
         button.addEventListener("click", function() {
             let xmlhttp = new XMLHttpRequest;
@@ -42,8 +42,8 @@ window.onload = () => {
       })
 
       let Delete = document.querySelectorAll(".delete_franchise")
-      for (let bouton of Delete ) {
-        bouton.addEventListener("click", function() {
+      for (let button of Delete ) {
+        button.addEventListener("click", function() {
           document.querySelector(".validerDelete").href=`/admin/supprimer_une_franchise/${this.dataset.id}`
           document.querySelector(".modal-body").innerText = `Etes vous sûrs de vouloir supprimer la franchise "${this.dataset.name}"?`
         })
