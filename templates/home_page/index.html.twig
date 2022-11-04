@@ -37,13 +37,14 @@
                 <h5 class="franchise card-header text-danger">{{ franchise.id}}  {{ franchise.name }}</h5><br>
                 <p class="franchise card-text">{{ franchise.description }}</p>
                 <strong><p class="franchise card-text text-primary">Responsable de la franchise : {{ franchise.user }}</p></strong>
+                <strong><p> contact : {{ franchise.user.email}} <br> {{ franchise.user.phoneNumber}} </p></strong>
                 <br>
                 <div class="form-check form-switch">
                   {% if (franchise.actif)  ? "1" %}
                         <button type="button" class="btn btn-success" data-id= "{{franchise.id}}">Actif</button>
                        
                     {% else %}
-                         </button type="button" class="btn btn-danger">Desactive</button>
+                         <button type="button" class="btn btn-danger" data-id= "{{franchise.id}}">Desactiver</button>
                   {% endif %}
                 </div>
                 <hr>
@@ -51,7 +52,6 @@
                   <br>
                   {% for permission in franchise.permissions %}
                   <p>{{ permission }}</p>
-                  <p>{{ actif }}</p>
                   {% endfor %}
               </div>
             </div>
@@ -88,19 +88,19 @@
                 <hr>
                 <p class="card-text">{{ structure.description }}</p>
                 <strong>
-                  <p class="card-text text-primary">Responsable de la structure( Mr ou Mme ) : {{ structure.user }} </p>
-                </strong>
-                <br>
+                  <p class="card-text text-primary">Responsable de la structure : {{ structure.user }}</p>
+                  <p> contact : {{ structure.user.email}} <br> {{ structure.user.phoneNumber}} </p></strong>
                 <strong>
-                  <p class="card-text text-success">Franchise de la structure : {{ structure.franchise }} </p>
+                  <p class="card-text text-success">Franchise de la structure : {{ structure.franchise }}<br> Responsable de la franchise : {{structure.franchise.user}}</p>
                 </strong>
+                
                 <br>
                 <div class="form-check form-switch">
                   {% if (structure.actif)  ? "1" %}
                         <button type="button" class="btn btn-success" data-id= "{{structure.id}}">Actif</button>
                        
                     {% else %}
-                         </button type="button" class="btn btn-danger">Desactive</button>
+                         <button type="button" class="btn btn-danger" data-id="{{structure.id}}">Desactiver</button>
                   {% endif %}
                 </div>
                 <hr>
@@ -109,7 +109,6 @@
                 </strong> <br>
                 {% for permission in structure.permissions %}
                     <p>{{ permission }}</p>
-                    <p>{{ actif }}</p>
                 {% endfor %}
                 <hr>
               </div>
