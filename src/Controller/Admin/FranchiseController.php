@@ -8,12 +8,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FranchiseController extends AbstractController
 {
     #[Route('/admin/creer_une_franchise', name: 'app_create_franchise')]
-    public function createFranchise(Request $request, EntityManagerInterface $entityManager): Response
+    public function createFranchise(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         // Instance de la classe franchise
         $franchise = new Franchise();
@@ -36,6 +38,19 @@ class FranchiseController extends AbstractController
 
             $entityManager->persist($franchise);
             $entityManager->flush();
+            $user = $this->getUser();
+         
+        // envoie un email     
+            
+            $email = (new Email ())
+                ->from('team-tech@basket-fit.fr')
+                ->to($user->getEmail)
+                -> subject ('Votre franchise à été créer')
+                -> text ("Votre franchise à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Votre franchise à bien été inscrite.');
 
             return $this->redirectToRoute('app_admin');
         }
@@ -46,7 +61,7 @@ class FranchiseController extends AbstractController
     }
 
     #[Route('/admin/modifier_une_franchise/{id}', name: 'app_update_franchise')]
-    public function UpdateFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager): Response
+    public function UpdateFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         
         //creation du formulaire
@@ -58,7 +73,20 @@ class FranchiseController extends AbstractController
         {
             $entityManager->persist($franchise);
             $entityManager->flush();
+            $user = $this->getUser();
+         
+        // envoie un email     
             
+            $email = (new Email ())
+                ->from('team-tech@basket-fit.fr')
+                ->to($user->getEmail)
+                -> subject ('Votre franchise à été modifier')
+                -> text ("Votre franchise à bien été modifier. Veuillez consulter les modifications effectués à l'adresse suivante: https://basket-fit.herokuapp.com/.");
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Votre franchise à bien été modifier.');
+
             return $this->redirectToRoute('app_admin');
         }
 

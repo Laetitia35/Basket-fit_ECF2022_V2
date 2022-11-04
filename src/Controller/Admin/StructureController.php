@@ -9,12 +9,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StructureController extends AbstractController
 {
     #[Route('/admin/creer_une_structure', name: 'app_create_structure')]
-    public function createStructure(Request $request, EntityManagerInterface $entityManager): Response
+    public function createStructure(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         // Instance de la classe Structure
         $structure = new Structure();
@@ -50,8 +52,17 @@ class StructureController extends AbstractController
 
             $entityManager->persist($structure);
             $entityManager->flush();
+            $user = $this->getUser();
 
-            return $this->redirectToRoute('app_admin');
+             // envoie email 
+            $email = (new Email ())->from('team-tech@basket-fit.fr')->to($user->getEmail)-> subject ('Votre structure à été créer')-> text ("Votre structure à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
+
+            $mailer->send($email);
+
+        $this->addFlash('success', 'Votre structure à bien été inscrite.');
+
+        return $this->redirectToRoute('app_admin');
+
         }
 
         return $this->render('admin/structure/index.html.twig', [
@@ -60,7 +71,7 @@ class StructureController extends AbstractController
     }
     
     #[Route('/admin/modifier_une_structure/{id}', name: 'app_update_structure')]
-    public function UpdateStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure): Response
+    public function UpdateStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure, MailerInterface $mailer): Response
     {
 
         $form = $this->createForm(StructureType::class, $structure); //creation du formulaire
@@ -72,7 +83,20 @@ class StructureController extends AbstractController
            
             $entityManager->persist($structure);
             $entityManager->flush();
+            $user = $this->getUser();
 
+        // envoie email 
+
+        $email = (new Email ())
+                ->from('team-tech@basket-fit.fr')
+                ->to($user->getEmail)
+                -> subject ('Votre structure à été modifier')
+                -> text ("Votre structure à bien été modifier. Veuillez consulter les modifications effectuer à l'adresse suivante: https://basket-fit.herokuapp.com/.");
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Votre structure à bien été modifier.');
+            
             return $this->redirectToRoute('app_admin');
         }
 

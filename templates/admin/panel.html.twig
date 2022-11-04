@@ -77,11 +77,18 @@
                   <hr>
                     <strong><p class="card-text bg-warning">Permission de la Franchise :  </p></strong>
                     <br>
+                     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                     cliquez ici
+                   </button>
+                  <div class="collapse" id="collapseExample"> 
+                    <div class="card card-body">
                     {% for permission in franchise.permissions %}
                     <p>{{ permission }}</p>
                     {% endfor %}
-                    <hr>
-                  
+                    </div>
+                  </div>
+                    
+                  <hr>
                   <a href="{{ path("app_update_franchise", {id: franchise.id}) }}" class="btn btn-success">Modifier</a>
                   <a href= "{{ path('app_delete_franchise', {id: franchise.id}) }}" type="button" class="btn btn-danger delete_franchise" data-bs-toggle="modal" data-bs-target="#modalDeleteFranchise" data-id="{{franchise.id}}" data-name="{{franchise.name}}">
                   Supprimer
@@ -126,9 +133,16 @@
                     </div>
                     <hr>
                     <strong><p class="card-text bg-warning">Permission de la structure : </p></strong><br>
-                    {% for permission in structure.permissions %}
-                    <p>{{ permission }}</p>
-                    {% endfor %}
+                    <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                     cliquez ici
+                    </button>
+                    <div class="collapse" id="collapseExample"> 
+                      <div class="card card-body">
+                      {% for permission in structure.permissions %}
+                        <p>{{ permission }}</p>
+                      {% endfor %}
+                      </div>
+                    </div>
                     <hr>
                     <a href="{{ path("app_update_structure", {id: structure.id}) }}" class="btn btn-success">Modifier</a>
                   
