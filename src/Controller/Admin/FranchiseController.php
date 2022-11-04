@@ -79,7 +79,7 @@ class FranchiseController extends AbstractController
             
             $email = (new Email ())
                 ->from('team-tech@basket-fit.fr')
-                ->to($user->getEmail)
+                //->to($user->getEmail)
                 -> subject ('Votre franchise à été modifier')
                 -> text ("Votre franchise à bien été modifier. Veuillez consulter les modifications effectués à l'adresse suivante: https://basket-fit.herokuapp.com/.");
 

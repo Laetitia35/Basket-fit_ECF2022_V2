@@ -65,11 +65,11 @@
               <div class="franchise card text-center">
               
                 <div class="franchise card-body">
-                  <h5 class="franchise card-header text-danger">{{ franchise.id }}  {{ franchise.name }}</h5><br>
+                  <h5 class="franchise card-header text-danger"> {{ franchise.name }}</h5><br>
                   <p class="franchise card-text">{{ franchise.description }}</p>
                   <strong><p class="franchise card-text text-primary">Responsable de la franchise : {{ franchise.user }}</p></strong>
-                  <p> contact : {{ franchise.user.email}} <br> {{ franchise.user.phoneNumber}} </p></strong>
-                  <strong>
+                  <strong><p> contact : {{ franchise.user.email}} <br> {{ franchise.user.phoneNumber}} </p></strong>
+                  
                   <br>
                   <div class="form-check form-switch">
                       <label class="form-check-label" for="flexSwitchCheckDefault">
@@ -80,7 +80,7 @@
                     <strong><p class="card-text bg-warning">Permission de la Franchise :  </p></strong>
                     <br>
                      <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                     cliquez ici
+                     Cliquez ici
                    </button>
                   <div class="collapse" id="collapseExample"> 
                     <div class="card card-body">
@@ -140,15 +140,15 @@
              
                 <div class="card text-center">
                   <div class="card-body">
-                    <h5 class="card-header text-danger">{{ structure.id }} {{ structure.name }}</h5>
+                    <h5 class="card-header text-danger">{{ structure.name }}</h5>
                     <br>
                     <span> Adresse : {{structure.adress}}<br>{{structure.codePostal}} {{structure.city}}<br>{{structure.phoneNumber}}
                     </span>
                     <hr>
                     <p class="card-text">{{ structure.description }}</p>
-                    <strong><p class="card-text text-primary">Responsable de la structure( Mr ou Mme ) : {{ structure.user }}</p></strong>
-                    <p> contact : {{ structure.user.email}} <br> {{ structure.user.phoneNumber}} </p></strong>
-                    <strong>
+                    <strong><p class="card-text text-primary">Responsable de la structure : {{ structure.user }}</p>
+                    <p>contact : {{ structure.user.email}} <br> {{ structure.user.phoneNumber}} </p></strong>
+                   
                     <strong><p class="card-text text-success">Franchise de la structure : {{ structure.franchise }}</p></strong>
                     <br>
                     <div class="form-check form-switch">
@@ -159,7 +159,7 @@
                     <hr>
                     <strong><p class="card-text bg-warning">Permission de la structure : </p></strong><br>
                     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                     cliquez ici
+                     Cliquez ici
                     </button>
                     <div class="collapse" id="collapseExample"> 
                       <div class="card card-body">

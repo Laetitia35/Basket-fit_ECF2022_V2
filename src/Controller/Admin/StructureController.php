@@ -89,7 +89,7 @@ class StructureController extends AbstractController
 
         $email = (new Email ())
                 ->from('team-tech@basket-fit.fr')
-                ->to($user->getEmail)
+                //->to($user->getEmail)
                 -> subject ('Votre structure à été modifier')
                 -> text ("Votre structure à bien été modifier. Veuillez consulter les modifications effectuer à l'adresse suivante: https://basket-fit.herokuapp.com/.");
 
