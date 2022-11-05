@@ -55,7 +55,11 @@ class StructureController extends AbstractController
             $user = $this->getUser();
 
              // envoie email 
-            $email = (new Email ())->from('team-tech@basket-fit.fr')->to($user->getEmail)-> subject ('Votre structure à été créer')-> text ("Votre structure à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
+            $email = (new Email ())
+                ->from('team-tech@basket-fit.fr')
+                //->to($user->getEmail)
+                -> subject ('Votre structure à été créer')
+                -> text ("Votre structure à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
 
             $mailer->send($email);
 
