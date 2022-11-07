@@ -9,12 +9,12 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FranchiseType extends AbstractType
@@ -40,8 +40,22 @@ class FranchiseType extends AbstractType
 
             ->add('Logo', FileType::class, [
                 'label' => 'Image du logo :',
+                'mapped'=> false,
                 'multiple' => false,
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' =>'1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/png',
+                            'application/pdf'
+                        ],
+                        
+                    ])
+                ]
                 
             ])
 

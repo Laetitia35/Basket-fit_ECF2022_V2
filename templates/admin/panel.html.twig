@@ -6,6 +6,17 @@
 
 {% block body %}
 
+<form class="d-flex justify-content-end" role="search">
+      {{ form_start(form) }}
+          <div class="form-group mx-sm-1">
+              {{ form_row(form.string) }} 
+          </div>
+          <div class="form-group mx-sm-4">
+             {{ form_row(form.submit) }}
+          </div>
+      {{ form_end(form) }}      
+</form>
+
   <a class="btn btn-warning" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Menu</a>
   <a href="{{ path('app_home_page') }}" class="btn btn-secondary">Retourner à l'espace utilisateur</a>
 
@@ -65,6 +76,7 @@
               
                 <div class="franchise card-body">
                   <h5 class="franchise card-header text-danger"> {{ franchise.name }}</h5><br>
+                  <div> {{ franchise.logo }} </div>
                   <p class="franchise card-text">{{ franchise.description }}</p>
                   <strong><p class="franchise card-text text-primary">Responsable de la franchise : {{ franchise.user }}</p></strong>
                   <strong><p> contact : {{ franchise.user.email}} <br> {{ franchise.user.phoneNumber}} </p></strong>

@@ -26,8 +26,8 @@ class Franchise
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Description = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $Logo = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Logo = null;
 
     #[ORM\Column]
     private ?bool $Actif = null;

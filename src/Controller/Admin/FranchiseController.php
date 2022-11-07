@@ -7,16 +7,18 @@ use App\Entity\User;
 use App\Form\FranchiseType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FranchiseController extends AbstractController
 {
     #[Route('/admin/creer_une_franchise', name: 'app_create_franchise')]
-    public function createFranchise(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function createFranchise(Request $request,  EntityManagerInterface $entityManager, MailerInterface $mailer, SluggerInterface $slugger): Response
     {
         // Instance de la classe franchise
         $franchise = new Franchise();
@@ -36,6 +38,26 @@ class FranchiseController extends AbstractController
                 
                 //$franchise->addPermission($permission);   
             //}
+            
+            // uploader une image 
+            $logoFile = $form->get('logo')->getData();
+            if ($logoFile) {
+                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logoFile->guessExtension();
+
+                try {
+                    $logoFile->move(
+                        $this->getParameter('franchise_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $franchise->setLogo($newFilename);
+            }
+
 
             $entityManager->persist($franchise);
             $entityManager->flush();
@@ -62,7 +84,7 @@ class FranchiseController extends AbstractController
     }
 
     #[Route('/admin/modifier_une_franchise/{id}', name: 'app_update_franchise')]
-    public function UpdateFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, User $user): Response
+    public function UpdateFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, SluggerInterface $slugger): Response
     {
         
         //creation du formulaire
@@ -72,6 +94,25 @@ class FranchiseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) 
         {
+            $logoFile = $form->get('Logo')->getData();
+            if ($logoFile) {
+                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logoFile->guessExtension();
+
+                try {
+                    $logoFile->move(
+                        $this->getParameter('franchise_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $franchise->setLogo($newFilename);
+            }
+
+
             $entityManager->persist($franchise);
             $entityManager->flush();
         

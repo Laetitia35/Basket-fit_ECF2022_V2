@@ -9,7 +9,7 @@ class Search
 
 {
     /**
-    *@var string
+    *@var String
     */
  public $string = '';
  
@@ -18,5 +18,9 @@ class Search
     */
  public $franchises = [];
 
+    /**
+    *@var Structure []
+    */
+ public $structures = [];
     
 }

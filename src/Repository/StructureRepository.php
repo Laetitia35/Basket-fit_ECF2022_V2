@@ -49,7 +49,7 @@ class StructureRepository extends ServiceEntityRepository
     {
         $query = $this 
             ->createQueryBuilder('s')
-            ->select('s');
+            ->select('s');   
        
         if (!empty($search->string)) {
             $query = $query
