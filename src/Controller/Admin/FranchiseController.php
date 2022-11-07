@@ -39,13 +39,13 @@ class FranchiseController extends AbstractController
 
             $entityManager->persist($franchise);
             $entityManager->flush();
-            $user = $this->getUser();
+            $franchiseEmail = $franchise->getUser()->getEmail();
          
         // envoie un email     
             
             $email = (new Email ())
-                ->from('team-tech@basket-fit.fr')
-                //->to( $user->getEmail)
+                ->from('admin@basket-fit.fr')
+                ->to($franchiseEmail,'team-tech@basket-fit.fr')
                 -> subject ('Votre franchise à été créer')
                 -> text ("Votre franchise à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
 
@@ -74,13 +74,14 @@ class FranchiseController extends AbstractController
         {
             $entityManager->persist($franchise);
             $entityManager->flush();
-            $user = $this->getUser();
+        
+            $franchiseEmail = $franchise->getUser()->getEmail();
          
         // envoie un email     
             
             $email = (new Email ())
-                ->from('team-tech@basket-fit.fr')
-                //->to($user->getEmail)
+                ->from('admin@basket-fit.fr')
+                ->to($franchiseEmail,'team-tech@basket-fit.fr')
                 -> subject ('Votre franchise à été modifier')
                 -> text ("Votre franchise à bien été modifier. Veuillez consulter les modifications effectués à l'adresse suivante: https://basket-fit.herokuapp.com/.");
 

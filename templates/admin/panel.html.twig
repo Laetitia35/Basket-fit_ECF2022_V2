@@ -7,7 +7,7 @@
 {% block body %}
 
   <a class="btn btn-warning" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Menu</a>
-  <a href="{{ path ('app_home_page') }}" class="btn btn-secondary">Retourner à l'espace utilisateur</a>
+  <a href="{{ path('app_home_page') }}" class="btn btn-secondary">Retourner à l'espace utilisateur</a>
 
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
@@ -58,9 +58,10 @@
       <div class="card-body">
         <a href="{{ path('app_create_franchise') }}" class="btn btn-info">Ajouter</a>
           
-          {% for franchise in franchises %}
+          
         
           <div class="row">
+            {% for franchise in franchises %}
             <div class="col-md-6">
               <div class="franchise card text-center">
               
@@ -119,8 +120,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          {% endfor %}
+            {% endfor %} 
+          </div> 
       </div>
     </section>
 
@@ -134,8 +135,8 @@
           <div class="card-body">
           <a href="{{ path('app_create_structure') }}" class="btn btn-info">Ajouter</a>
 
-           {% for structure in structures %}
             <div class="row">
+              {% for structure in structures %}
               <div class="col-md-6">
              
                 <div class="card text-center">
@@ -197,8 +198,8 @@
                   </div>
                 </div>
               </div>
+              {% endfor %}
             </div>
-          {% endfor %}
           </div>
       </div>    
     </section> 
