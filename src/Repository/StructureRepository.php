@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Classe\Search;
 use App\Entity\Structure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,26 @@ class StructureRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+
+    /**
+     * Requete qui permet de récupérer les franchises en fonction de la recherche de l'administrateur
+     * @return Structure []
+     */
+    public function findWithSearch(Search $search)
+    {
+        $query = $this 
+            ->createQueryBuilder('s')
+            ->select('s');
+       
+        if (!empty($search->string)) {
+            $query = $query
+                ->andWhere('s.Name LIKE :string')
+                ->setParameter('string', "%{$search->string}%");
+        }
+        
+        return $query->getQuery()->getResult();
     }
 
 //    /**

@@ -40,22 +40,30 @@
                                 <a class="nav-link" href="{{ path('app_home_page', {'_fragment' : 'franchise'}) }}">Franchise</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_home_page', {'_fragment' : 'structure'}) }}""> Structures</a>
+                                <a class="nav-link" href="{{ path('app_home_page', {'_fragment' : 'structure'}) }}"> Structures</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="">Permissions</a>
                             </li>
                         </ul>
                         
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                                <button class="btn btn-danger" type="submit">Rechercher</button>
+                            <form class="form-inline" role="search">
+                                
+                                    {{ form_start(form) }}
+                                    <div class=" form-group mx-sm-3 mb-2">
+                                        {{ form_row(form.string) }}
+                                    </div>
+                                    <div class=" form-group mx-sm-3 mb-2">
+                                        {{ form_row(form.submit) }}
+                                    </div>
+                                    {{ form_end(form) }}
+                                
                             </form>
                     </div>
                     
                     <div class="navbar-item-custom">
                         {% if app.user %}
-                        <a href="{{ path('app_login') }}" style="text-decoration:none"> Mon compte ( {{ app.user.name }} )</a> | <a href ="{{ path('app_logout') }}">Déconnexion</a>
+                        <a href="{{ path('app_login') }}" style="text-decoration:none"> Mon compte </a> | <a href ="{{ path('app_logout') }}">Déconnexion</a>
                         {% else %}
                         <button class="btn btn-danger my-2 my-sm-0" onclick="btn_auth()" type="submit">
                             <a class="text-light" href="{{ path('app_login') }}">S'identifier</a>

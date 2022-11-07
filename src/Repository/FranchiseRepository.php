@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Classe\Search;
 use App\Entity\Franchise;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,18 +41,24 @@ class FranchiseRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Franchise[] Returns an array of Franchise objects
+     * Requete qui permet de récupérer les franchises en fonction de la recherche de l'administrateur
+     * @return Franchise []
      */
-    public function findByExampleField($permissions): array
+    public function findWithSearch(Search $search)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.permissions = :perm')
-            ->setParameter('perm', $permissions)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this 
+            ->createQueryBuilder('f')
+            ->select('s', 'f')
+            ->join('f.structures', 's');
+        
+       
+        if (!empty($search->string)) {
+            $query = $query
+                ->andWhere('f.Name LIKE :string')
+                ->setParameter('string', "%{$search->string}%");
+        }
+        
+        return $query->getQuery()->getResult();
     }
 
 
