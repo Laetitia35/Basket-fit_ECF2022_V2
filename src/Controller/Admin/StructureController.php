@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class StructureController extends AbstractController
 {
     #[Route('/admin/creer_une_structure', name: 'app_create_structure')]
-    public function createStructure(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, Franchise $franchise): Response
+    public function createStructure(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         // Instance de la classe Structure
         $structure = new Structure();
@@ -27,15 +27,17 @@ class StructureController extends AbstractController
 
         // ecouteur de la requête
         $form->handleRequest($request);
-         
+        
         // condition si le formulaire et envoyer et valide alors j'execute le code
         if($form->isSubmitted() && $form->isValid()) {
+           
 
         //on ajoute les permissions accordés à la franchise  
 
-            /**
-             * //Franchise $franchise
-             */
+            
+            /** 
+            *  Franchise $franchise
+            */
             //$franchise = $form->get('Franchise')->getData();
             //$Permissions = $franchise->getPermissions();
 
@@ -53,21 +55,23 @@ class StructureController extends AbstractController
 
             $entityManager->persist($structure);
             $entityManager->flush();
+            
+
             $structureEmail = $structure->getUser()->getEmail();
-            $franchiseEmail = $franchise->getUser()->getEmail();
+            
 
              // envoie email 
             $email = (new Email ())
                 ->from('admin@basket-fit.fr')
-                ->to($structureEmail, $franchiseEmail, 'team-tech@basket-fit.fr')
+                ->to($structureEmail, 'team-tech@basket-fit.fr')
                 -> subject ('Votre structure à été créer')
                 -> text ("Votre structure à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
 
             $mailer->send($email);
 
-        $this->addFlash('success', 'Votre structure à bien été inscrite.');
+            $this->addFlash('success', 'Votre structure à bien été inscrite.');
 
-        return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin');
 
         }
 
