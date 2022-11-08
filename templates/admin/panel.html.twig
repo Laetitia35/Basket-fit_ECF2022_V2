@@ -76,7 +76,10 @@
               
                 <div class="franchise card-body">
                   <h5 class="franchise card-header text-danger"> {{ franchise.name }}</h5><br>
-                  <div> {{ franchise.logo }} </div>
+                  <div class="logo-franchise">
+                    <img src="/uploads/logo/{{ franchise.logo }}" class="card-img-top" alt="{{ franchise.logo }}" style="width:200px;">
+                  </div>
+                  <br>
                   <p class="franchise card-text">{{ franchise.description }}</p>
                   <strong><p class="franchise card-text text-primary">Responsable de la franchise : {{ franchise.user }}</p></strong>
                   <strong><p> contact : {{ franchise.user.email}} <br> {{ franchise.user.phoneNumber}} </p></strong>

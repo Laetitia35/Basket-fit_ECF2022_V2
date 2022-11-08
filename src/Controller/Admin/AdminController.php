@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Classe\Search;
-use App\Entity\Franchise;
-use App\Entity\Permission;
-use App\Entity\Structure;
-use App\Entity\User;
 use App\Form\SearchType;
 use App\Repository\FranchiseRepository;
 use App\Repository\StructureRepository;
