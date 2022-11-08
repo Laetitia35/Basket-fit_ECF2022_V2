@@ -8,7 +8,6 @@ use App\Repository\FranchiseRepository;
 use App\Repository\PermissionRepository;
 use App\Repository\StructureRepository;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {   
-    private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager) 
     {

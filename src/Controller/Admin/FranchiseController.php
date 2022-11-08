@@ -154,8 +154,8 @@ class FranchiseController extends AbstractController
     public function DeleteFranchise(Franchise $franchise, EntityManagerInterface $entityManager)
     {
 
-        $entityManager->persist($franchise);
         $entityManager->remove($franchise);
+        $entityManager->flush();
 
         $this->addFlash('message', 'Franchise supprimer avec succès');
 

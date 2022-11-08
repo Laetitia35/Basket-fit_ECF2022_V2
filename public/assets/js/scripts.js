@@ -1,6 +1,5 @@
 // admin activer btn franchise  
 
-
 window.onload = () => {
     let active_franchise = document.querySelectorAll("[id=franchise_active]")
     for (let button of active_franchise) {
@@ -49,24 +48,38 @@ window.onload = () => {
     }
 }
 
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+
+
 // Ajout d'une modale pour supprimer une franchise
 
-      const myModal = document.getElementById('myModal')
-      const myInput = document.getElementById('myInput')
 
-      myModal.addEventListener('shown.bs.modal', () => {
-      myInput.focus()
-      })
+let supprimer = document.querySelectorAll(".modalSupprimerFranchise")
+for (let button of supprimer ) {
+  button.addEventListener("click", function() {
+    document.querySelector(".modal-footer a").href=`/admin/supprimer_une_franchise/${this.dataset.id}`
+    document.querySelector(".modal-body").innerText = `Etes vous sûr(e) de vouloir supprimer la franchise ? "${this.dataset.name}"`
+  })
+  
+}
 
-      let Delete = document.querySelectorAll(".delete_franchise")
-      for (let button of Delete ) {
-        button.addEventListener("click", function() {
-          document.querySelector(".validerDelete").href=`/admin/supprimer_une_franchise/${this.dataset.id}`
-          document.querySelector(".modal-body").innerText = `Etes vous sûrs de vouloir supprimer la franchise "${this.dataset.name}"?`
-        })
-        
-      }
 
+// Ajout d'une modale pour supprimer une structure
+
+
+  let Delete = document.querySelectorAll(".modalSupprimerStructure")
+  for (let button of Delete ) {
+    button.addEventListener("click", function() {
+      document.querySelector(".modal-footer a").href=`/admin/supprimer_une_structure/${this.dataset.id}`
+      document.querySelector(".modal-body").innerText = `Etes vous sûr(e) de vouloir supprimer la structure ?"${this.dataset.name}"`
+    })
+    
+  }
 
 
 

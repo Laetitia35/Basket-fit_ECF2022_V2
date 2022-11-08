@@ -131,8 +131,8 @@ class StructureController extends AbstractController
     public function DeleteStructure( EntityManagerInterface $entityManager, Structure $structure) 
     {
 
-        $entityManager->persist($structure);
         $entityManager->remove($structure);
+        $entityManager->flush();
 
         $this->addFlash('message', 'Structure supprimer avec succès.');
 

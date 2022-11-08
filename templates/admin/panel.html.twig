@@ -93,10 +93,10 @@
                   <hr>
                     <strong><p class="card-text bg-warning">Permission de la Franchise :  </p></strong>
                     <br>
-                     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                     <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#affichePermission" aria-expanded="false" aria-controls="affichePermission">
                      Cliquez ici
                    </button>
-                  <div class="collapse" id="collapseExample"> 
+                  <div class="collapse" id="affichePermission"> 
                     <div class="card card-body">
                     {% for permission in franchise.permissions %}
                     <p>{{ permission }}</p>
@@ -107,15 +107,15 @@
                   <hr>
                   <a href="{{ path("app_update_franchise", {id: franchise.id}) }}" class="btn btn-success">Modifier</a>
 
-                  <a href="{{ path('app_delete_franchise', {id: franchise.id}) }}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{franchise.id}}" data-name="{{franchise.name}}">
+                  <a href="{{ path('app_delete_franchise', {id: franchise.id}) }}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalSupprimerFranchise" data-id="{{franchise.id}}" data-name="{{franchise.name}}">
                     Supprimer
                   </a>
                   <!-- Modal Supprimer -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalSupprimerFranchise" tabindex="-1" role="dialog" aria-labelledby="modalSupprimerFranchise" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Supprimer une Franchise</h5>
+                            <h5 class="modal-title" id="modalSupprimerFranchise">Supprimer une Franchise</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -172,10 +172,10 @@
                     </div>
                     <hr>
                     <strong><p class="card-text bg-warning">Permission de la structure : </p></strong><br>
-                    <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#affichePermission" aria-expanded="false" aria-controls="affichePermission">
                      Cliquez ici
                     </button>
-                    <div class="collapse" id="collapseExample"> 
+                    <div class="collapse" id="affichePermission"> 
                       <div class="card card-body">
                       {% for permission in structure.permissions %}
                         <p>{{ permission }}</p>
@@ -185,15 +185,15 @@
                     <hr>
                     <a href="{{ path("app_update_structure", {id: structure.id}) }}" class="btn btn-success">Modifier</a>
                   
-                    <a href="#" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{structure.id}}" data-name="{{structure.name}}">
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalSupprimerStructure">
                     Supprimer
-                    </a>
+                    </button>
                     <!-- Modal Supprimer -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalSupprimerStructure" tabindex="-1" role="dialog" aria-labelledby="modalSupprimerStructure" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Supprimer une Structure</h5>
+                            <h5 class="modal-title" id="modalSupprimerStructure">Supprimer une Structure</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
