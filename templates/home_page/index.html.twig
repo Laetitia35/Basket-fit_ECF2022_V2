@@ -34,7 +34,7 @@
           <div class="col-md-6">
             <div class="franchise card text-center">
               <div class="franchise card-body">
-                <h5 class="franchise card-header text-danger">{{ franchise.id}}  {{ franchise.name }}</h5><br>
+                <h5 class="franchise card-header text-danger">{{ franchise.name }}</h5><br>
                 <div class="logo-franchise">
                     <img src="/uploads/logo/{{ franchise.logo }}" class="card-img-top" alt="{{ franchise.logo }}" style="width:200px;">
                 </div>
@@ -81,12 +81,12 @@
       <div class="row">
       {% for structure in structures %}
         {% if app.user.id == structure.user.id %}
-          {% elseif app.user.id == structure.franchise.id %}
+          {#% elseif app.user.id == structure.franchise.id %#}
         
           <div class="col-md-6">
             <div class="card text-center">
               <div class="card-body">
-                <h5 class="card card-header text-danger">{{ structure.id }}  {{ structure.name }}</h5><br>
+                <h5 class="card card-header text-danger">{{ structure.name }}</h5><br>
                 <span> Adresse : {{structure.adress}}<br>{{structure.codePostal}} {{structure.city}}<br>{{structure.phoneNumber}}
                 </span>
                 <hr>
