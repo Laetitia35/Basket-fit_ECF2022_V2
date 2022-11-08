@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Classe\Search;
 use App\Form\SearchType;
 use App\Repository\FranchiseRepository;
+use App\Repository\PermissionRepository;
 use App\Repository\StructureRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -24,11 +25,12 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin', name: 'app_admin')]
-    public function index(FranchiseRepository $repositoryFranchises, StructureRepository $repositoryStructure, UserRepository $repositoryUser, Request $request ): Response
+    public function index(FranchiseRepository $repositoryFranchises, StructureRepository $repositoryStructure, UserRepository $repositoryUser, PermissionRepository $repositoryPermission, Request $request ): Response
     {    
        
         $franchises = $repositoryFranchises->findAll();
         $structures = $repositoryStructure->findAll();
+        $permissions = $repositoryPermission->findAll();
         $user = $repositoryUser->findAll();
         $search = new Search();
 
@@ -46,6 +48,7 @@ class AdminController extends AbstractController
             'franchises' => $franchises,
             'structures' => $structures,
             'user' => $user,
+            'permissions' => $permissions,
             'form' => $form->createView()
             
         ]);

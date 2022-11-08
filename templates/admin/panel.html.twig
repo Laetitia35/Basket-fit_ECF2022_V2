@@ -87,7 +87,7 @@
                   <br>
                   <div class="form-check form-switch">
                       <label class="form-check-label" for="flexSwitchCheckDefault">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault franchise_active" {{ (franchise.actif) ? 'checked' : "" }} data-id= "{{franchise.id}}"> Actif
+                        <input class="franchise form-check-input" type="checkbox" role="switch" id="franchise_active" {{ (franchise.actif) ? 'checked' : "" }} data-id= "{{franchise.id}}"> Actif
                       </label>    
                   </div>
                   <hr>
@@ -216,6 +216,52 @@
           </div>
       </div>    
     </section> 
+
+    <section id="permissions">
+    
+    <div class="Permissions card text-center">
+      <div class="card-header">
+          <img src= "{{ asset('images/livre-fleche-droite.png') }}">
+          <h3 class="text-center">Permissions</h3>  
+      </div>
+      <div class="card-body">
+        <a href="{{ path('app_create_permission') }}" class="btn btn-info">Ajouter</a>
+    
+          <div class="permission card-body">
+            <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-header text-danger">Liste des permissions disponible pour vos salles de sport </h5>
+                  <table class="table table-striped">
+                    <thead>
+                      
+                      <tr>
+                        <th scope="col">Permission</th>
+                        <th scope="col">Actif</th>
+                        <th scope="col">Modifier</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for permission in permissions %}
+                      <tr>
+                        <td>{{ permission.name }}</td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">
+                              <input class="permission form-check-input" type="checkbox" role="switch" id="permission_active" {{ (permission.actif) ? 'checked' : "" }} data-id= "{{permission.id}}">Actif
+                            </label>
+                          </div>
+                        </td>
+                        <td><a href="{{ path("app_update_permission", {id: permission.id}) }}" class="btn btn-success">Modifier</a></td>  
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    
+                  </table>       
+                </div>
+            </div>
+          </div>                  
+      </div>
+    </section>
 
     {% block javascript %} {% endblock %}
 

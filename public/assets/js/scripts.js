@@ -32,6 +32,23 @@ window.onload = () => {
     }
 }
 
+
+// admin activer btn Permission  
+
+window.onload = () => {
+    let active = document.querySelectorAll("[id=permission_active]")
+    for (let button of active) {
+        button.addEventListener("click", function() {
+            let xmlhttp = new XMLHttpRequest;
+            //xmlhttp.onReadyStateChange = () => {
+                //verifier la reponse :200
+            //}
+            xmlhttp.open("get",`/admin/activer_une_permission/${this.dataset.id}`)
+            xmlhttp.send()
+        })
+    }
+}
+
 // Ajout d'une modale pour supprimer une franchise
 
       const myModal = document.getElementById('myModal')
