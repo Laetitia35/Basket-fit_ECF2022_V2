@@ -56,14 +56,17 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
             
+            /** 
+            * @var Franchise $franchise
+            */
 
             $structureEmail = $structure->getUser()->getEmail();
-            
+            $franchiseEmail = $franchise->getUser()->getEmail();
 
              // envoie email 
             $email = (new Email ())
                 ->from('admin@basket-fit.fr')
-                ->to($structureEmail, 'team-tech@basket-fit.fr')
+                ->to($structureEmail, $franchiseEmail, 'team-tech@basket-fit.fr')
                 -> subject ('Votre structure à été créer')
                 -> text ("Votre structure à bien été créer. Veuillez consulter vos permissions accordées à l'adresse suivante: https://basket-fit.herokuapp.com/. Vous trouverez vos identifiants et mot de passe transmis lors d'un précédent mail envoyer pour la création de votre profil utilisateur.");
 
@@ -81,7 +84,7 @@ class StructureController extends AbstractController
     }
     
     #[Route('/admin/modifier_une_structure/{id}', name: 'app_update_structure')]
-    public function UpdateStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure, MailerInterface $mailer, Franchise $franchise): Response
+    public function UpdateStructure(Request $request, EntityManagerInterface $entityManager, Structure $structure, MailerInterface $mailer): Response
     {
 
         $form = $this->createForm(StructureType::class, $structure); //creation du formulaire
@@ -94,6 +97,9 @@ class StructureController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
 
+            /** 
+            * @var Franchise $franchise
+            */
             $franchiseEmail = $franchise->getUser()->getEmail();
             $structureEmail = $structure->getUser()->getEmail();
 
