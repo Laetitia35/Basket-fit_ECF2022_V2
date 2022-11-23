@@ -23,14 +23,14 @@ class Permission
     private ?bool $Actif = null;
 
     #[ORM\OneToMany(mappedBy: 'permission', targetEntity: FranchisePermission::class)]
-    private Collection $Permission;
+    private Collection $permissions;
 
-    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permission')]
+    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permissions')]
     private Collection $structures;
 
     public function __construct()
     {
-        $this->Permission = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
         $this->structures = new ArrayCollection();
     }
 
@@ -71,15 +71,15 @@ class Permission
     /**
      * @return Collection<int, FranchisePermission>
      */
-    public function getPermission(): Collection
+    public function getPermissions(): Collection
     {
-        return $this->Permission;
+        return $this->permissions;
     }
 
     public function addPermission(FranchisePermission $permission): self
     {
-        if (!$this->Permission->contains($permission)) {
-            $this->Permission->add($permission);
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
             $permission->setPermission($this);
         }
 
@@ -88,7 +88,7 @@ class Permission
 
     public function removePermission(FranchisePermission $permission): self
     {
-        if ($this->Permission->removeElement($permission)) {
+        if ($this->permissions->removeElement($permission)) {
             // set the owning side to null (unless already changed)
             if ($permission->getPermission() === $this) {
                 $permission->setPermission(null);

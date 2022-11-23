@@ -36,11 +36,11 @@ class Franchise
     private ?User $User = null;
 
     #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: FranchisePermission::class, orphanRemoval: true)]
-    private Collection $FranchisePermission;
+    private Collection $franchisePermissions;
 
     public function __construct()
     {
-        $this->FranchisePermission = new ArrayCollection();
+        $this->franchisePermissions = new ArrayCollection();
     }
 
 
@@ -118,15 +118,15 @@ class Franchise
     /**
      * @return Collection<int, FranchisePermission>
      */
-    public function getFranchisePermission(): Collection
+    public function getFranchisePermissions(): Collection
     {
-        return $this->FranchisePermission;
+        return $this->franchisePermissions;
     }
 
     public function addFranchisePermission(FranchisePermission $franchisePermission): self
     {
-        if (!$this->FranchisePermission->contains($franchisePermission)) {
-            $this->FranchisePermission->add($franchisePermission);
+        if (!$this->franchisePermissions->contains($franchisePermission)) {
+            $this->franchisePermissions->add($franchisePermission);
             $franchisePermission->setFranchise($this);
         }
 
@@ -135,7 +135,7 @@ class Franchise
 
     public function removeFranchisePermission(FranchisePermission $franchisePermission): self
     {
-        if ($this->FranchisePermission->removeElement($franchisePermission)) {
+        if ($this->franchisePermissions->removeElement($franchisePermission)) {
             // set the owning side to null (unless already changed)
             if ($franchisePermission->getFranchise() === $this) {
                 $franchisePermission->setFranchise(null);

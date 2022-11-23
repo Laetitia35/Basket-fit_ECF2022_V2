@@ -19,24 +19,22 @@ class FranchisePermission
     private ?bool $Actif = null;
 
     
-    #[ORM\ManyToOne(inversedBy: 'Franchise')]
+    #[ORM\ManyToOne(inversedBy: 'franchises')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Franchise $franchise = null;
 
     
-    #[ORM\ManyToOne(inversedBy: 'Permission')]
+    #[ORM\ManyToOne(inversedBy: 'permissions')]
     private ?Permission $permission = null;
 
     #[ORM\OneToMany(mappedBy: 'franchisePermission', targetEntity: Structure::class)]
-    private Collection $structure;
+    private Collection $structures;
 
 
-    public function __construct($franchise, $permission)
+    public function __construct()
     {
         $this->Franchise_Permission = new ArrayCollection();
-        $this->Franchise = $franchise;
-        $this->Permission = $permission;
-        $this->structure = new ArrayCollection();
+        $this->structures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,15 +81,15 @@ class FranchisePermission
     /**
      * @return Collection<int, Structure>
      */
-    public function getStructure(): Collection
+    public function getStructures(): Collection
     {
-        return $this->structure;
+        return $this->structures;
     }
 
     public function addStructure(Structure $structure): self
     {
-        if (!$this->structure->contains($structure)) {
-            $this->structure->add($structure);
+        if (!$this->structures->contains($structure)) {
+            $this->structures->add($structure);
             $structure->setFranchisePermission($this);
         }
 
@@ -100,7 +98,7 @@ class FranchisePermission
 
     public function removeStructure(Structure $structure): self
     {
-        if ($this->structure->removeElement($structure)) {
+        if ($this->structures->removeElement($structure)) {
             // set the owning side to null (unless already changed)
             if ($structure->getFranchisePermission() === $this) {
                 $structure->setFranchisePermission(null);

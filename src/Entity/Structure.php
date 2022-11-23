@@ -44,11 +44,11 @@ class Structure
     private ?FranchisePermission $franchisePermission = null;
 
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
-    private Collection $permission;
+    private Collection $permissions;
 
     public function __construct()
     {
-        $this->permission = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     
@@ -173,15 +173,15 @@ class Structure
     /**
      * @return Collection<int, Permission>
      */
-    public function getPermission(): Collection
+    public function getPermissions(): Collection
     {
-        return $this->permission;
+        return $this->permissions;
     }
 
     public function addPermission(Permission $permission): self
     {
-        if (!$this->permission->contains($permission)) {
-            $this->permission->add($permission);
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
         }
 
         return $this;
@@ -189,7 +189,7 @@ class Structure
 
     public function removePermission(Permission $permission): self
     {
-        $this->permission->removeElement($permission);
+        $this->permissions->removeElement($permission);
 
         return $this;
     }
