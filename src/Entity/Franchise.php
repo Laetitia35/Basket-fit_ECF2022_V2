@@ -34,19 +34,13 @@ class Franchise
 
     #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
     private ?User $User = null;
- 
-   
-    #[ORM\OneToMany(mappedBy: 'Franchise', targetEntity: Structure::class)]
-    private Collection $structures;
 
-    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'franchises')]
-    private Collection $permissions;
+    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: FranchisePermission::class, orphanRemoval: true)]
+    private Collection $FranchisePermission;
 
     public function __construct()
     {
-       
-        $this->structures = new ArrayCollection();
-        $this->permissions = new ArrayCollection();
+        $this->FranchisePermission = new ArrayCollection();
     }
 
 
@@ -115,36 +109,6 @@ class Franchise
         return $this;
     }
 
-    
-    /**
-     * @return Collection<int, Structure>
-     */
-    public function getStructures(): Collection
-    {
-        return $this->structures;
-    }
-
-    public function addStructure(Structure $structure): self
-    {
-        if (!$this->structures->contains($structure)) {
-            $this->structures->add($structure);
-            $structure->setFranchise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStructure(Structure $structure): self
-    {
-        if ($this->structures->removeElement($structure)) {
-            // set the owning side to null (unless already changed)
-            if ($structure->getFranchise() === $this) {
-                $structure->setFranchise(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function __toString()
     {
@@ -152,27 +116,34 @@ class Franchise
     }
 
     /**
-     * @return Collection<int, Permission>
+     * @return Collection<int, FranchisePermission>
      */
-    public function getPermissions(): Collection
+    public function getFranchisePermission(): Collection
     {
-        return $this->permissions;
+        return $this->FranchisePermission;
     }
 
-    public function addPermission(Permission $permission): self
+    public function addFranchisePermission(FranchisePermission $franchisePermission): self
     {
-        if (!$this->permissions->contains($permission)) {
-            $this->permissions->add($permission);
+        if (!$this->FranchisePermission->contains($franchisePermission)) {
+            $this->FranchisePermission->add($franchisePermission);
+            $franchisePermission->setFranchise($this);
         }
 
         return $this;
     }
 
-    public function removePermission(Permission $permission): self
+    public function removeFranchisePermission(FranchisePermission $franchisePermission): self
     {
-        $this->permissions->removeElement($permission);
+        if ($this->FranchisePermission->removeElement($franchisePermission)) {
+            // set the owning side to null (unless already changed)
+            if ($franchisePermission->getFranchise() === $this) {
+                $franchisePermission->setFranchise(null);
+            }
+        }
 
         return $this;
     }
+
 }
 

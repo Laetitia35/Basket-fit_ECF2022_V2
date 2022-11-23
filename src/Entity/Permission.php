@@ -22,17 +22,15 @@ class Permission
     #[ORM\Column]
     private ?bool $Actif = null;
 
-    #[ORM\ManyToMany(targetEntity: Franchise::class, mappedBy: 'permissions')]
-    private Collection $franchises;
+    #[ORM\OneToMany(mappedBy: 'permission', targetEntity: FranchisePermission::class)]
+    private Collection $Permission;
 
-    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permissions')]
+    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permission')]
     private Collection $structures;
 
-
-    
     public function __construct()
     {
-        $this->franchises = new ArrayCollection();
+        $this->Permission = new ArrayCollection();
         $this->structures = new ArrayCollection();
     }
 
@@ -65,36 +63,36 @@ class Permission
         return $this;
     }
 
-    
-    
-
     public function __toString()
     {
         return $this->Name;
     }
 
     /**
-     * @return Collection<int, Franchise>
+     * @return Collection<int, FranchisePermission>
      */
-    public function getFranchises(): Collection
+    public function getPermission(): Collection
     {
-        return $this->franchises;
+        return $this->Permission;
     }
 
-    public function addFranchise(Franchise $franchise): self
+    public function addPermission(FranchisePermission $permission): self
     {
-        if (!$this->franchises->contains($franchise)) {
-            $this->franchises->add($franchise);
-            $franchise->addPermission($this);
+        if (!$this->Permission->contains($permission)) {
+            $this->Permission->add($permission);
+            $permission->setPermission($this);
         }
 
         return $this;
     }
 
-    public function removeFranchise(Franchise $franchise): self
+    public function removePermission(FranchisePermission $permission): self
     {
-        if ($this->franchises->removeElement($franchise)) {
-            $franchise->removePermission($this);
+        if ($this->Permission->removeElement($permission)) {
+            // set the owning side to null (unless already changed)
+            if ($permission->getPermission() === $this) {
+                $permission->setPermission(null);
+            }
         }
 
         return $this;
@@ -126,4 +124,5 @@ class Permission
 
         return $this;
     }
+
 }

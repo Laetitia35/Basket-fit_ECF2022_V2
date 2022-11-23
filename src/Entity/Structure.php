@@ -35,25 +35,26 @@ class Structure
 
     #[ORM\OneToOne(inversedBy: 'structure', cascade: ['persist', 'remove'])]
     private ?User $User = null;
-
-    #[ORM\ManyToOne(inversedBy: 'structures')]
-    private ?Franchise $Franchise = null;
-
-    
+ 
     #[ORM\Column(length: 60)]
     private ?string $City = null;
 
-    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
-    private Collection $permissions;
+    #[ORM\ManyToOne(inversedBy: 'structure')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?FranchisePermission $franchisePermission = null;
 
-    public function __toString() 
-    {
-        return $this->Name;
-    }
+    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'structures')]
+    private Collection $permission;
 
     public function __construct()
     {
-        $this->permissions = new ArrayCollection();
+        $this->permission = new ArrayCollection();
+    }
+
+    
+    public function __toString() 
+    {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -145,20 +146,6 @@ class Structure
         return $this;
     }
 
-    public function getFranchise(): ?Franchise
-    {
-        return $this->Franchise;
-    }
-
-    public function setFranchise(?Franchise $Franchise): self
-    {
-        $this->Franchise = $Franchise;
-
-        return $this;
-    }
-
-    
-
     public function getCity(): ?string
     {
         return $this->City;
@@ -171,18 +158,30 @@ class Structure
         return $this;
     }
 
+    public function getFranchisePermission(): ?FranchisePermission
+    {
+        return $this->franchisePermission;
+    }
+
+    public function setFranchisePermission(?FranchisePermission $franchisePermission): self
+    {
+        $this->franchisePermission = $franchisePermission;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Permission>
      */
-    public function getPermissions(): Collection
+    public function getPermission(): Collection
     {
-        return $this->permissions;
+        return $this->permission;
     }
 
     public function addPermission(Permission $permission): self
     {
-        if (!$this->permissions->contains($permission)) {
-            $this->permissions->add($permission);
+        if (!$this->permission->contains($permission)) {
+            $this->permission->add($permission);
         }
 
         return $this;
@@ -190,8 +189,9 @@ class Structure
 
     public function removePermission(Permission $permission): self
     {
-        $this->permissions->removeElement($permission);
+        $this->permission->removeElement($permission);
 
         return $this;
     }
+ 
 }
