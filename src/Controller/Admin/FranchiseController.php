@@ -40,7 +40,7 @@ class FranchiseController extends AbstractController
             //}
             
             // uploader une image 
-            $logoFile = $form->get('logo')->getData();
+            $logoFile = $form->get('Logo')->getData();
             if ($logoFile) {
                 $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Franchise;
+use App\Entity\FranchisePermission;
 use App\Entity\Permission;
 use App\Entity\Structure;
 use App\Entity\User;
@@ -87,13 +88,9 @@ class StructureType extends AbstractType
                 'multiple' => false,
             ])
 
-            ->add('Franchise', EntityType::class, [
-                'class' => Franchise:: class,
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('F')
-                    ->orderBy('F.Name', 'ASC');
-                },
-                'choice_label' =>'Name',
+            ->add('FranchisePermission', EntityType::class, [
+                'class' => FranchisePermission:: class,
+                'choice_label' =>'franchise',
                 'placeholder' => 'Franchise référente : ',
                 'label' => 'Franchise : ',
                 'multiple' => false,

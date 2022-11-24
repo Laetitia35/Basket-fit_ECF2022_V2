@@ -83,7 +83,7 @@ class FranchiseType extends AbstractType
                   ],
             ])
 
-            -> add('permissions', EntityType::class, [
+            /*-> add('permissions', EntityType::class, [
                 'class' => Permission:: class,
                 'multiple' => true,
                 'query_builder' => function(EntityRepository $repository) {
@@ -94,7 +94,7 @@ class FranchiseType extends AbstractType
                   ],
                   'expanded' => true,
                   'constraints' => new NotBlank(['message' => 'veuillez choisir une ou plusieurs permissions'])
-            ])
+            ])*/
 
             ->add('submit', SubmitType::class, [
                 'label' => "Valider"

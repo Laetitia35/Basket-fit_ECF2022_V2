@@ -77,7 +77,7 @@
                 <div class="franchise card-body">
                   <h5 class="franchise card-header text-danger"> {{ franchise.name }}</h5><br>
                   <div class="logo-franchise">
-                    <img src="/uploads/logo/{{ franchise.logo }}" class="card-img-top" alt="{{ franchise.logo }}" style="width:200px;">
+                    <img src="/uploads/logo/{{ franchise.logo }}" class="card-img-top" alt="{{ franchise.logo }}" style="width:200px;"-->
                   </div>
                   <br>
                   <p class="franchise card-text">{{ franchise.description }}</p>
@@ -98,9 +98,9 @@
                    </button>
                   <div class="collapse" id="affichePermission"> 
                     <div class="card card-body">
-                    {% for permission in franchise.permissions %}
+                    {#% for permission in franchise.permissions %}
                     <p>{{ permission }}</p>
-                    {% endfor %}
+                    {% endfor %#}
                     </div>
                   </div>
                     

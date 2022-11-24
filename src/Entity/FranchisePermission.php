@@ -33,7 +33,8 @@ class FranchisePermission
 
     public function __construct()
     {
-        $this->Franchise_Permission = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
+        //$this->franchisePermission = new ArrayCollection();
         $this->structures = new ArrayCollection();
     }
 

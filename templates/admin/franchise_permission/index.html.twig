@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Franchise Permissions{% endblock %}
+
+{% block body %}
+
+<h3 class="text-center">Inscrire les permissions de la franchise </h3>
+
+{{ form_start(form) }}
+
+    {{ form_row(form.franchise) }}
+    {{ form_row(form.permissions) }}
+    {{ form_row(form.Actif) }}
+    {{ form_row(form.submit) }}
+
+{{ form_end(form) }}
+
+    {% block javascript %} 
+    
+    {% endblock %}
+
+{% endblock %}
