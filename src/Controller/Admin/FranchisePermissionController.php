@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FranchisePermissionController extends AbstractController
 {
-    #[Route('/admin/creer_une_franchise_permission', name: 'app_franchise_permission')]
+    #[Route('/admin/creer_une_franchise_permission', name: 'app_create_franchise_permission')]
     public function createFranchisePermission(Request $request, EntityManagerInterface $entityManager): Response
     {
          //Instance de la classe Permission

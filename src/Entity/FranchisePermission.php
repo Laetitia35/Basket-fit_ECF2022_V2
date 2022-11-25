@@ -6,6 +6,7 @@ use App\Repository\FranchisePermissionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Laminas\Code\Generator\EnumGenerator\Name;
 
 #[ORM\Entity(repositoryClass: FranchisePermissionRepository::class)]
 class FranchisePermission
@@ -23,19 +24,17 @@ class FranchisePermission
     #[ORM\JoinColumn(nullable: false)]
     private ?Franchise $franchise = null;
 
-    
-    #[ORM\ManyToOne(inversedBy: 'permissions')]
-    private ?Permission $permission = null;
-
     #[ORM\OneToMany(mappedBy: 'franchisePermission', targetEntity: Structure::class)]
     private Collection $structures;
+
+    #[ORM\ManyToMany(targetEntity: Permission::class)]
+    private Collection $permissions;
 
 
     public function __construct()
     {
-        $this->permissions = new ArrayCollection();
-        //$this->franchisePermission = new ArrayCollection();
         $this->structures = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,18 +66,7 @@ class FranchisePermission
         return $this;
     }
 
-    public function getPermission(): ?Permission
-    {
-        return $this->permission;
-    }
-
-    public function setPermission(?Permission $permission): self
-    {
-        $this->permission = $permission;
-
-        return $this;
-    }
-
+   
     /**
      * @return Collection<int, Structure>
      */
@@ -109,5 +97,34 @@ class FranchisePermission
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->permissions->Name;
+        return $this->franchise->Name;
+    }
+
+    /**
+     * @return Collection<int, Permission>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permission $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): self
+    {
+        $this->permissions->removeElement($permission);
+
+        return $this;
+    }
    
 }

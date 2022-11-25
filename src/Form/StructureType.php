@@ -87,7 +87,7 @@ class StructureType extends AbstractType
                 'label' => 'Nom : ',
                 'multiple' => false,
             ])
-
+// voir collectionType ??
             ->add('FranchisePermission', EntityType::class, [
                 'class' => FranchisePermission:: class,
                 'choice_label' =>'franchise',
@@ -96,7 +96,7 @@ class StructureType extends AbstractType
                 'multiple' => false,
                 
             ])
-
+  
             ->add('permissions', EntityType::class, [
                 'class' => Permission:: class,
                 'choice_label' =>'Name',
