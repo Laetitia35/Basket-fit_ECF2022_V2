@@ -99,9 +99,9 @@
                    </button>
                   <div class="collapse" id="affichePermission"> 
                     <div class="card card-body">
-                    {#% for permission in franchise.permissions %}
-                    <p>{{ permission }}</p>
-                    {% endfor %#}
+                    {% for permission in franchisePermissions %}
+                    <p>{{ permissions }}</p>
+                    {% endfor %}
                     </div>
                   </div>
                     

@@ -6,7 +6,6 @@ use App\Repository\FranchisePermissionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Laminas\Code\Generator\EnumGenerator\Name;
 
 #[ORM\Entity(repositoryClass: FranchisePermissionRepository::class)]
 class FranchisePermission
@@ -35,6 +34,7 @@ class FranchisePermission
     {
         $this->structures = new ArrayCollection();
         $this->permissions = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -99,8 +99,8 @@ class FranchisePermission
 
     public function __toString()
     {
-        return $this->permissions->Name;
-        return $this->franchise->Name;
+            return $this->Name;
+        
     }
 
     /**

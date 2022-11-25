@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Classe\Search;
 use App\Form\SearchType;
+use App\Repository\FranchisePermissionRepository;
 use App\Repository\FranchiseRepository;
 use App\Repository\PermissionRepository;
 use App\Repository\StructureRepository;
@@ -25,12 +26,13 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin', name: 'app_admin')]
-    public function index(FranchiseRepository $repositoryFranchises, StructureRepository $repositoryStructure, UserRepository $repositoryUser, PermissionRepository $repositoryPermission, Request $request ): Response
+    public function index(FranchiseRepository $repositoryFranchises, StructureRepository $repositoryStructure, UserRepository $repositoryUser, PermissionRepository $repositoryPermission, FranchisePermissionRepository $repositoryFranchisePermission, Request $request ): Response
     {    
        
         $franchises = $repositoryFranchises->findAll();
         $structures = $repositoryStructure->findAll();
         $permissions = $repositoryPermission->findAll();
+        $franchisePermissions= $repositoryFranchisePermission->findAll();
         $user = $repositoryUser->findAll();
         $search = new Search();
 
@@ -49,6 +51,7 @@ class AdminController extends AbstractController
             'structures' => $structures,
             'user' => $user,
             'permissions' => $permissions,
+            'franchisePermissions' => $franchisePermissions,
             'form' => $form->createView()
             
         ]);
